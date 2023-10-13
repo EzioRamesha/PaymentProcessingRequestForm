@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+    <script type="text/javascript" src="~/Scripts/PageScripts/Viewer/viewerController.js"></script>
+}
+
+@section Styles{
+    <style type="text/css">
+        .app-modal-window .modal-dialog {
+            width: 1200px;
+        }
+
+        .popover-actions {
+            max-width: 300px;
+        }
+    </style>
+}
+
+<div ng-controller="viewerController" data-ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-md-12 col-lg-12">
+            @*@Html.Partial("~/Views/Viewer/pvAllRequests.cshtml")*@
+        </div>
+    </div>
+</div>

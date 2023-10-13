@@ -1,0 +1,41 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Currencies
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!Currencies.length">
+            <span class="info">
+                No currency added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="Currencies.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Abbreviation</th>
+                    <th class="text-right">1 USD Value</th>
+                    <th class="text-right">1 EUR Value</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="currency in Currencies">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{currency.Name}}</td>
+                    <td>{{currency.Code}}</td>
+                    <td class="text-right">{{mask(currency.USDValue, 6)}}</td>
+                    <td class="text-right">{{mask(currency.EuroValue, 6)}}</td>
+                    <td>{{currency.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Currency" ng-click="edit(currency)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!currency.IsEnabled" ng-click="enable(currency)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="currency.IsEnabled" ng-click="disable(currency)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

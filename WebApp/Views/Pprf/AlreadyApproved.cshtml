@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+@model WebApp.DAL.Models.ResponseModels.ResponseObject<WebApp.DAL.Models.ResponseModels.RequestApprovalResponse>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Approved PPRF: @Model.Data.DocumentNo</title>
+</head>
+<body>
+
+
+    <div>
+        <p><font face="Tahoma" size="2">The @Model.Data.DocumentType Request No: <b>@Model.Data.DocumentNo</b></font> is already approved.</p>
+
+        <p><font face="Tahoma" size="2">You may close this window now. Thank you.</font></p>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "Manage Countries";
+}
+
+@*@Scripts.Render("~/bundles/angular/generalService")
+    @Scripts.Render("~/bundles/settings/country")*@
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/CountryManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/CountriesController.js"></script>
+}
+
+<div ng-controller="CountryController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="newCountryDialog()"><i class="fa fa-plus"></i> Add Country</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/Department/Department.cshtml")
+        </div>
+    </div>
+</div>
+

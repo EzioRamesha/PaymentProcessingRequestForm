@@ -1,0 +1,28 @@
+﻿@model WebApp.DAL.Models.ApproveRejectRequestModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <div>
+        @using (Html.BeginForm("SaveQuestion", "Pprf", FormMethod.Post))
+        { 
+            <label>Ask your question:</label>
+            <br/>
+            <textarea name="question" id="question" style="resize:none;" cols="50" rows="4"></textarea>
+            @Html.HiddenFor(m=>m.token)
+            @Html.HiddenFor(m=>m.v)
+
+            <br/>
+            <input type="submit" value="Submit" />
+        }
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Reject Reason Types
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!RejectTypes.length">
+            <span class="info">
+                No Reject Types added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="RejectTypes.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Description</th>                  
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="RejectType in RejectTypes">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{RejectType.Description}}</td>
+                   
+                    <td>{{RejectType.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Country" ng-click="EditRejectTypesDialog(RejectType)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!RejectType.IsEnabled" ng-click="RejectTypeEnable(RejectType)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="RejectType.IsEnabled" ng-click="RejectTypeDisable(RejectType)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

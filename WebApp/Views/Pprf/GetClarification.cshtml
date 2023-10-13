@@ -1,0 +1,24 @@
+﻿@using WebApp.DAL.Models.ResponseModels
+@model ResponseObject<RequestClarificationResponse>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Clarification sought for PPRF: @Model.Data.DocumentNo</title>
+</head>
+<body>
+
+
+    <div>
+        <p><font face="Tahoma" size="2">A notification email has been sent to <b>@Model.Data.OriginatorName</b>, to provide clarification for @Model.Data.DocumentType Request No: <b>@Model.Data.DocumentNo</b></font></p>
+
+        <p><font face="Tahoma" size="2">You may close this browser now.  Thank you.</font></p>
+
+    </div>
+
+</body>
+</html>

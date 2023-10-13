@@ -1,0 +1,84 @@
+﻿<ul uib-pagination
+    total-items="Pager.TotalItems"
+    items-per-page="Pager.ItemsPerPage"
+    ng-model="Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="refresh(Pager)"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Payees
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!Payees.length">
+            <span class="info">
+                
+                No payee added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" >
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>
+                        <select name="Name" placeholder="Pick a Payee Name..."
+                                class="form-control input-sm"
+                                data-ng-model="Payee.PayeeId"
+                                data-ng-options="Payee.Id as Payee.Name for Payee in FilterPayees | orderBy:'Name'">
+                            <option value="" selected disabled>--- Name ---</option>
+                        </select>
+                        <script type="text/javascript">
+                            function Selectonclick() {
+                                $('select').selectize({
+                                    sortField: 'text'
+                                });
+                            };
+                            document.addEventListener("DOMContentLoaded", function (event) {
+                                setTimeout(Selectonclick, 300)
+                            });
+
+                        </script>
+                        <a class="btn btn-sm btn-green" href="javascript:void(0)" ng-click="filter(Pager,Payee)"><i class="fa fa-search"></i> Search</a>
+                        <a  href="javascript:void(0)" ng-click="refresh(Pager)" class="btn btn-sm btn-dark"><i class="fa fa-times-rectangle-o" download></i> Reset</a>
+                        @*ng-change="filter(Pager,Payee)"*@
+                    </th>
+                    @*<th>Name</th>*@
+                    <th>Phone</th>
+                    <th>Fax</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody ng-if="Payees.length">
+                <tr ng-repeat="payee in Payees">
+                    <td>{{ ((Pager.CurrentPage - 1) * Pager.ItemsPerPage) + $index + 1}}.</td>
+                    <td>{{payee.Name}}</td>
+                    <td>{{payee.Phone}}</td>
+                    <td>{{payee.Fax}}</td>
+                    <td>{{payee.IsEnabled ? "Active" : "Deactive"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Payee" data-ng-click="payeeDialog(payee)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Bank Account Details" data-ng-click="payeeBankDetailsDialog(payee)"><i class="fa fa-bank"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!payee.IsEnabled" data-ng-click="enable(payee)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="payee.IsEnabled" data-ng-click="disable(payee)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ul uib-pagination
+    total-items="Pager.TotalItems"
+    items-per-page="Pager.ItemsPerPage"
+    ng-model="Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="refresh(Pager)"></ul>
+
+

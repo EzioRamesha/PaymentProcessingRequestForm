@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Manage Users";
+}
+
+@*@Scripts.Render("~/bundles/angular/generalService")
+    @Scripts.Render("~/bundles/settings/user")*@
+
+@section Scripts{
+    <script src="/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="/Scripts/PageScripts/Settings/UsersController.js"></script>
+}
+
+<div ng-controller="UserController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="newUserDialog()"><i class="fa fa-plus"></i> Add User</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/Users/pvListUsers.cshtml")
+        </div>
+    </div>
+</div>
+

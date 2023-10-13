@@ -1,0 +1,71 @@
+﻿<ul uib-pagination
+    total-items="searchCriteria.Pager.TotalItems"
+    items-per-page="searchCriteria.Pager.ItemsPerPage"
+    ng-model="searchCriteria.Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="getApprovedForms(searchCriteria)" ng-if="approvedRequests.length"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Approved PO/PPRFs
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!approvedRequests.length">
+            <span class="info">
+                No Pending Requests
+            </span>
+        </div>
+        <table class="table table-hover table-striped" ng-if="approvedRequests.length">
+            <thead>
+                <tr>
+                    <th class="text-right">#</th>
+                    <th>Originator</th>
+                    <th>Paying Entity</th>
+                    <th>Payee</th>
+                    <th>Description</th>
+                    <th>PPRF Date</th>
+                    <th>Due Date</th>
+                    <th>PPRF Number</th>
+                    <th>Status</th>
+                    <th>Note</th>
+                    <th>Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="approvedRequest in approvedRequests">
+                    <td class="text-right">{{ ((searchCriteria.Pager.CurrentPage-1)*10)+$index + 1 }}.</td>
+                    <td>{{ approvedRequest.OriginatorName }}</td>
+                    <td>{{ approvedRequest.PayingEntityName }}</td>
+                    <td>{{ approvedRequest.PayeeName }}</td>
+                    <td>{{ approvedRequest.Description | limitTo : 40 }}</td>
+                    <td>{{ approvedRequest.PprfDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ approvedRequest.DueDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ approvedRequest.PprfNo }}</td>
+                    @*<td>{{ approvedRequest.DocumentType + "/" + approvedRequest.PayingEntityCode + "/" + ("0"+(approvedRequest.Month)).slice(-2) + ("0"+approvedRequest.Year).slice(-2) + "/" + ("00000"+approvedRequest.Number).slice(-6) }}</td>*@
+                    <td>{{ approvedRequest.Status }}</td>
+                    <td>{{ approvedRequest.Note }}</td>
+                    <td>
+                        <a class="btn btn-xs btn-primary" title="View Details" ng-click="viewApprovedRequestDetails(approvedRequest)">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <span ng-if-start="approvedRequest.Status=='Approved'">|</span>
+                        @*<a ng-if-end class="btn btn-xs btn-success" title="Close PO/PPRF" ng-click="closeRequest(approvedRequest)">
+            <i class="fa fa-briefcase"></i>
+        </a>*@
+                        @*Added by Ramesh*@
+                        <a href="javascript:void(0)" ng-if-end class="btn btn-xs btn-success" title="Close PO/PPRF" data-toggle="confirmation" ng-click="closeRequestDialog(approvedRequest)">
+                            <i class="fa fa-briefcase"></i>
+                        </a>
+                        <a href="javascript:void(0)" class="btn btn-xs btn-default" title="Close PO/PPRF" data-toggle="confirmation" ng-click="NotesDialog(approvedRequest)">
+                            <i class="fa fa-check-square-o"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+

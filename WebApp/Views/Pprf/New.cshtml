@@ -1,0 +1,54 @@
+﻿@{
+    ViewBag.Title = "New PPRF";
+}
+
+@section Styles{
+    <style type="text/css">
+        .background-success {
+            background-color: #42f495;
+        }
+
+        .app-modal-window .modal-dialog {
+            width: 900px;
+        }
+
+        .form-control[disabled="disabled"] {
+            background: #808080;
+            color: #FFFFFF;
+        }
+    </style>
+}
+@*@Scripts.Render("~/bundles/angular/generalService")
+    @Scripts.Render("~/bundles/angular/pprfNew")*@
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeBankDetailsPopupController.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeePopupController.js"></script>
+    <script src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+    <script src="~/Scripts/PageScripts/NewRequest/newRequestController.js"></script>
+}
+
+<div class="row mbl" ng-controller="newRequest" ng-init="initialize()">
+    <div class="col-lg-12">
+        <form name="newRequest" autocomplete="off">
+
+            @Html.Partial("~/Views/Pprf/pvNew_Details.cshtml")
+
+            <br />
+            @Html.Partial("~/Views/Pprf/pvNew_Services.cshtml")
+
+            <br />
+            @Html.Partial("~/Views/Pprf/pvNew_SupportingDocument.cshtml")
+
+            <br />
+            @Html.Partial("~/Views/Pprf/pvNew_Approvers.cshtml")
+           
+            <div class="text-right">
+                <input type="submit" value="Save as Draft" class="btn btn-blue" ng-click="SaveDraft(request)" />
+                <input type="submit" value="Create Request" class="btn btn-primary" ng-click="createRequest(request)" />
+            </div>
+        </form>
+    </div>
+</div>

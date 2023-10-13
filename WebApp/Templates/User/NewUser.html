@@ -1,0 +1,119 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        Create New User
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">
+                            Name
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-user"></i>
+                            <input id="Name" type="text" placeholder="" class="form-control" data-ng-model="newUser.Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Email" class="control-label">
+                            E-mail
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-envelope"></i>
+                            <input id="Email" type="text" placeholder="" class="form-control" data-ng-model="newUser.Email" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputName" class="control-label">
+                            Password
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-lock"></i>
+                            <input id="Password" type="password" placeholder="" class="form-control" data-ng-model="newUser.Password" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="inputName" class="control-label">
+                            Confirm Password
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-lock"></i>
+                            <input id="ConfirmPassword" type="password" placeholder="" class="form-control" data-ng-model="newUser.ConfirmPassword" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="form-control input-sm" data-ng-model="newUser.Department" data-ng-options="department as department.Name for department in Departments">
+                            <option value="" selected>Department</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="Email" class="control-label">
+                            Designation
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-star"></i>
+                            <input id="Designation" type="text" placeholder="" class="form-control" data-ng-model="newUser.Designation" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label">Approver/Originator</label>
+                </div>
+                <div class="input-icon right col-md-3" ng-repeat="group in newUser.SelectedGroups">
+                    <input type="checkbox" ng-value="group" ng-model="group.Selected" ng-checked="group.Selected" /> {{ group.Name }}
+                </div>
+            </div>
+
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label">Role</label>
+                </div>
+                <div class="input-icon right col-md-3" ng-repeat="role in Roles">
+                    <input type="radio" ng-value="role" ng-model="newUser.Role" ng-checked="role.IsEnabled" name="userRole"/> <label ng-click="newUser.Role=role">{{ role.Name }}</label>
+                </div>
+            </div>
+
+            <!--<br />
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label ">Permissions</label>
+                </div>
+                <div class="input-icon right col-md-4" ng-repeat="permission in newUser.Permissions">
+                    <input type="checkbox" ng-value="permission" ng-model="permission.IsEnabled" ng-checked="permission.IsEnabled" /> {{ permission.Name }}
+                </div>
+            </div>-->
+
+
+            <div class="text-right">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="create(newUser)">Create</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="reset()">Reset</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>

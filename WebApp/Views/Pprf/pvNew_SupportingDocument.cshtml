@@ -1,0 +1,51 @@
+﻿<div class="panel panel-grey">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-3 text-left">
+                Supporting Documents
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pan">
+        <div class="form-body pal">
+            <div class="box-content">
+                <span style="color:#000; background-color:yellow">Click</span>
+                <a id="maskUpload"
+                   name="files"
+                   href="javascript:void(0);"
+                   ngf-select
+                   ngf-multiple="true"
+                   ngf-max-files="5"
+                   ngf-change="validate($files)"
+                   ngf-model-invalid="invalidFiles"
+                   ngf-ignore-invalid="maxFiles"
+                   ngf-pattern="'image/*,application/pdf,.xls,.xlsx,.doc,.docx,.msg'"
+                   ngf-accept="'image/*,application/pdf,.xls,.xlsx,.doc,.docx,.msg'"
+                   style="color:#00f;"> here </a>
+                <span style="color:#000; background-color:yellow">to attach documents</span>
+                <table class="table table-condensed table-striped">
+                    <thead>
+                        <tr>
+                            <th>Attachment Name</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in request.FileAttachmentsDetails">
+                            <td>{{item.Name}}</td>
+                            <td>
+                                <a href="javascript:void(0)" class="btn btn-danger btn-xs" ng-click="removeFile(item)">
+                                    <i class="glyphicon glyphicon-remove"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <span ng-show="myform.files.$error.maxFiles">* Maximum 2 documents allowed</span>
+                <span ng-show="myform.files.$error.pattern">* Allowed file types are "images/*, .pdf, .doc, .docx, .xls, .xlsx, .msg"</span>
+            </div>
+
+            
+        </div>
+    </div>
+</div>

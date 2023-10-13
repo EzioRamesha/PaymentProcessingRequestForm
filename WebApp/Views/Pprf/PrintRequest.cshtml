@@ -1,0 +1,393 @@
+﻿@model WebApp.DAL.Models.RequestFormDetails
+
+@{
+    Layout = null;
+    string dateformat = "dd/MM/yyyy";
+
+    string payingEntityImage = string.Empty;
+    string base64 = string.Empty;
+    if (Model.PayingEntityLogo != null)
+    {
+        base64 = Convert.ToBase64String(Model.PayingEntityLogo);
+    }
+    payingEntityImage = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+@functions {
+    public static int sortByDate(WebApp.DAL.Models.QuestionAndAnswer x, WebApp.DAL.Models.QuestionAndAnswer y){
+        DateTime xDate = DateTime.ParseExact(x.AskedOn, "dd/MM/yyyy",null);
+        return DateTime.ParseExact(x.AskedOn, "dd/MM/yyyy", null) > DateTime.ParseExact(x.AskedOn, "dd/MM/yyyy", null) ? 0 : 1;
+    }
+}
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html moznomarginboxes mozdisallowselectionprint>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title></title>
+    <style type="text/css">
+        @@media screen {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+
+            table {
+                width: 100%;
+                border-spacing: 0;
+            }
+
+                table thead tr th, table tbody tr td, table td {
+                    border: 1px solid #cecece;
+                    border-spacing: 0;
+                    padding: 3px;
+                    font-family: Tahoma;
+                    font-size: smaller;
+                }
+        }
+
+        @@media print {
+            html, body {
+                width: 210mm;
+                height: 297mm;
+            }
+
+            body {
+                -webkit-print-color-adjust: exact;
+				color-adjust:exact;
+            }
+
+            div.page {
+                page-break-after: always;
+            }
+
+            @@page {
+                margin: 0 1.6cm;
+            }
+
+            /*body {
+                margin: 0 1cm;
+            }*/
+
+            table {
+                width: 100%;
+                border-spacing: 0;
+            }
+
+                table thead tr th, table tbody tr td, table td {
+                    border: 1px solid #cecece;
+                    border-spacing: 0;
+                    padding: 3px;
+                    font-family: Tahoma;
+                    font-size: smaller;
+                }
+        }
+    </style>
+</head>
+<body style="">
+    <div class="page">
+        <table>
+            <tbody>
+                <tr>
+                    <td rowspan="3" style="width:40%; border-color:#000;background-color:#000;color:#fff;text-align:center;">
+                        <h2>PAYMENT PROCESS REQUEST FORM (PPRF)</h2>
+                    </td>
+                    <td rowspan="3" style="width:30%"><img alt="@Model.PayingEntityName" src="@payingEntityImage" height="95" width="150"></td>
+                    <td colspan="2" style="width:30%">
+                        <b>PPRF No:</b> <br />@Model.PprfNo
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>PPRF Date:</b></td>
+                    <td>@Model.PprfDate.ToString(dateformat)</td>
+                </tr>
+                <tr>
+                    <td><b>Payment Due:</b></td>
+                    <td>@Model.DueDate.ToString(dateformat)</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+        <table>
+            <tbody>
+                <tr>
+                    <td colspan="2"></td>
+                    <td><b>Document Status:</b></td>
+                    <td>@Model.Status</td>
+                </tr>
+                <tr>
+                    <td><b>Paying Entity: </b></td>
+                    <td>@Model.PayingEntityName</td>
+                    <td><b>Document Type: </b></td>
+                    <td>@Model.DocumentType</td>
+                </tr>
+                <tr>
+                    <td><b>Country/Region</b></td>
+                    <td>-@*@Model.CountryName*@</td>
+                    <td><b>Month/Year</b></td>
+                    <td>@Model.Month/@Model.Year</td>
+                </tr>
+                <tr>
+                    <td><b>Department</b></td>
+                    <td>@Model.DepartmentName</td>
+                    <td><b>Frequency</b></td>
+                    <td>@Model.FrequencyTypeName</td>
+                </tr>
+                <tr>
+                    <td><b>Payment Method</b></td>
+                    <td>@Model.PaymentMethodName</td>
+                    <td><b>Expense Type</b></td>
+                    <td>@Model.ExpenseTypeName</td>
+                </tr>
+                <tr>
+                    <td><b>Payee</b></td>
+                    <td>@Model.Payee.Name</td>
+                    <td><b>Payee Bank</b></td>
+                    <td>@Model.PayeeBankDetails.BankName</td>
+                </tr>
+
+                @if (!string.IsNullOrEmpty(Model.Payee.HotelName) && !string.IsNullOrEmpty(Model.Payee.CountryName))
+                {
+                    <tr>
+                        <td colspan="2"><b></b></td>
+                        <td><b>Hotel Name</b></td>
+                        <td>@String.Concat(Model.Payee.HotelName, string.IsNullOrEmpty(Model.Payee.HotelName) ? "" : ", ", Model.Payee.CountryName)</td>
+                    </tr>
+                }
+
+                <tr>
+                    <td><b>Description</b></td>
+                    <td colspan="3">@Model.Description</td>
+                </tr>
+                <tr>
+                    <td><b>Remarks</b></td>
+                    <td colspan="3">@Model.Remarks</td>
+                </tr>
+            </tbody>
+        </table>
+        <br />
+
+        @if (Model.DocumentType == "PFB")
+        {
+            <table>
+                <tbody>
+                    <tr>
+                        <td><b>Budget PPRF No</b></td>
+                        <td>@Model.BudgetPPRFNo</td>
+                        <td><b>Approved Amount</b></td>
+                        <td>@Model.BudgetApprovedAmtUSDDesc<br />
+                            (@Model.BudgetApprovedAmtDesc)</td>
+                        <td><b>Spent Amount</b></td>
+                        <td>@Model.BudgetSpentAmtUSDDesc</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td><b>Remaining Amount</b></td>
+                        <td>@Model.BudgetRemainingAmtUSDDesc<br />
+                            @Model.BudgetOverSpentDesc</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+        }
+
+        @if (Model.DocumentType == "BDG")
+        {
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2"><b>Budget Validity</b></td>
+                        <td>@Model.BudgetValidityDesc</td>
+                        <td colspan="2"><b>Restricted Payee Only?</b></td>
+                        <td>@Model.RestrictedPayeeOnlyFlag</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br />
+        }
+
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="7" style="background-color:#cecece; text-align:left;">Goods and Service(s)</th>
+                </tr>
+                <tr>
+                    <th style="width: 2%;">#</th>
+                    <th style="width: 41%; text-align:left;">Particulars of Purchase(s) of Goods or Services (@Model.GoodsAndServices.Count)</th>
+                    <th style="width: 9.5%;">Tax Type</th>
+                    <th style="width: 10%;">Qty</th>
+                    <th style="width: 12.5%;">@Model.CurrencyType.Code Amount</th>
+                    <th style="width: 12.5%;">USD Amount</th>
+                    <th style="width: 12.5%;">EUR Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    var index = 0;
+                    foreach (var service in Model.GoodsAndServices)
+                    {
+                        <tr>
+                            <td style="width: 2%;"> @(index++ + 1)</td>
+                            <td style="width: 41%;">@service.Description</td>
+                            <td style="width: 9.5%;">@service.TaxType.Name</td>
+                            <td style="width: 10%;" align="right">@service.Quantity</td>
+                            <td style="width: 12.5%;" align="right">@String.Format("{0:N}", service.Amount)</td>
+                            <td style="width: 12.5%;" align="right">@String.Format("{0:N}", service.AmountUSD)</td>
+                            <td style="width: 12.5%;" align="right">@String.Format("{0:N}", service.AmountEuro)</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2" rowspan="4" style="width: 43%; vertical-align:top;">
+                        <b>Description:</b>
+                        @Model.Description
+                        <br />
+                        <b>Remarks:</b>
+                        @Model.Remarks
+                    </td>
+                    <td colspan="2" style="text-align: right;width: 19.5%"><b>Sub-Total</b></td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.SubTotal)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.SubTotalUSD)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.SubTotalEuro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; width: 19.5%"><b>Tax Amt 1</b></td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount1)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount1USD)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount1Euro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; width: 19.5%"><b>Tax Amt 2</b></td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount2)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount2USD)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount2Euro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: right; width: 19.5%"><b>Tax Amt 3</b></td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount3)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount3USD)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TaxAmount3Euro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2" rowspan="4" style="width: 43%"></td>
+                    <td colspan="2" style="text-align: right; width: 19.5%"><b>Total</b></td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.Total)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TotalUSD)</td>
+                    <td style="text-align:right; width:12.5%">@String.Format("{0:N}", Model.TotalEuro)</td>
+                </tr>
+            </tfoot>
+        </table>
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="7" style="background-color:#cecece; text-align:left;">Approval Process</th>
+                </tr>
+                <tr>
+                    <th style="width:2%; text-align:left;">#</th>
+                    <th style="width:19%;text-align:left;">Name</th>
+                    <th style="width:19%;text-align:left;">Position</th>
+                    <th style="width:15%;text-align:left;">Department</th>
+                    <th style="width:10%;text-align:left;">Approval Status</th>
+                    <th style="width:10%;text-align:left;">Response Date</th>
+                    <th style="width:25%;text-align:left;">Remarks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b>Originator</b></td>
+                    <td>@Model.Originator.OriginatorName</td>
+                    <td>@Model.Originator.OriginatorDesignation</td>
+                    <td>@Model.Originator.OriginatorDepartmentName</td>
+                    <td>@Model.Originator.OriginatorStatus</td>
+                    <td>@Model.PprfDate.ToString(dateformat)</td>
+                    <td style="width:2%;border:solid 1px #cecece"></td>
+                </tr>
+                @{
+                    index = 0;
+                    foreach (var approver in Model.Approvals)
+                    {
+                        <tr>
+                            <td>@(index++ + 1)</td>
+                            <td>@approver.ApproverName</td>
+                            <td>@approver.ApproverDesignation</td>
+                            <td>@approver.ApproverDepartmentName</td>
+                            <td>@approver.ApprovalStatus</td>
+                            <td>@(approver.ResponseDate.HasValue ? approver.ResponseDate.Value.ToString(dateformat) : string.Empty)</td>
+                            <td>@approver.Remarks</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <br />
+        <table>
+            <thead>
+                <tr>
+                    <th colspan="4" style="background-color: #cecece; text-align:left;"><b>Payee Bank Details</b></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width:15%"><b>Bank Name:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.BankName</td>
+                    @*<td style="width:15%"><b>Payee Address:</b></td>
+                    <td style="width:35%">@Model.Payee.AddressLine1<br />@Model.Payee.AddressLine2<br />@Model.Payee.AddressLine3</td>*@
+                    <td style="width:15%"><b>Bank Address: </b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.BankAddress</td>
+                </tr>
+                <tr>
+                    <td style="width:15%"><b>Account Name:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.AccountName</td>
+                    <td style="width:15%"><b>Type of Account:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.AccountType</td>
+                </tr>
+                <tr>
+                    <td style="width:15%"><b>Account Number:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.AccountNumber</td>
+                    <td style="width:15%"><b>IBAN Number</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.IBAN</td>
+                </tr>
+                <tr>
+                    <td style="width:15%"><b>Swift Code:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.Swift</td>
+                    <td style="width:15%"><b>Sort/IFSC Code:</b></td>
+                    <td style="width:35%">@Model.PayeeBankDetails.IFSC</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    @if(Model.Approvals.Any(a=>a.Questions.Count > 0))
+    { 
+    <div class="page" style="margin:20px 12px; font-family:Tahoma;">
+        <div>
+            <h2>Queries (@Model.PprfNo)</h2>
+        </div>
+        <hr />
+        <div style="font-size:smaller">
+            @{
+                foreach (var approval in Model.Approvals)
+                {
+                    approval.Questions.Sort(sortByDate);
+                    foreach (var query in approval.Questions)
+                    {
+                        <div style="margin-top:12px;">
+                            <b>Q. @query.Question</b>
+                        </div>
+                        <div>
+                            <b>A. </b>@query.Answer
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+    }
+</body>
+</html>

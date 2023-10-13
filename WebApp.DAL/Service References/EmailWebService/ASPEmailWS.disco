@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://services.q-ion.com/ASPEmailNet4/ASPEmailWS.asmx?wsdl" docRef="https://services.q-ion.com/ASPEmailNet4/ASPEmailWS.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://services.q-ion.com/ASPEmailNet4/ASPEmailWS.asmx" xmlns:q1="http://tempuri.org/ASPEmailNet/ASPEmailWS" binding="q1:ASPEmailWSSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://services.q-ion.com/ASPEmailNet4/ASPEmailWS.asmx" xmlns:q2="http://tempuri.org/ASPEmailNet/ASPEmailWS" binding="q2:ASPEmailWSSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

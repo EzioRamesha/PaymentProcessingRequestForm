@@ -1,0 +1,367 @@
+﻿@using WebApp.DAL.Data
+@functions{
+    public string GetAntiForgeryToken()
+    {
+        string cookieToken, formToken;
+        AntiForgery.GetTokens(null, out cookieToken, out formToken);
+        return cookieToken + ":" + formToken;
+    }
+}
+@{
+    var currentUserPermissions = new List<string>();
+    if (User.Identity.IsAuthenticated)
+    {
+        currentUserPermissions.AddRange(User.Identity.GetPermissions());
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Dashboard | Dashboard</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="~/Content/images/qi.png">
+    <link rel="apple-touch-icon" href="~/Content/images/icons/favicon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/Content/images/icons/favicon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/Content/images/icons/favicon-114x114.png">
+    <!--Loading bootstrap css-->
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,300,700">
+    <link type="text/css" rel="stylesheet" href="http://fonts.googleapis.com/css?family=Oswald:400,700,300">
+
+
+    @Styles.Render("~/Content/styles")
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+    <div>
+        <!--BEGIN THEME SETTING-->
+        @*<div id="theme-setting">
+                <a href="#" data-toggle="dropdown" data-step="1" data-intro="&lt;b&gt;Many styles&lt;/b&gt; and &lt;b&gt;colors&lt;/b&gt; be created for you. Let choose one and enjoy it!"
+                   data-position="left" class="btn-theme-setting"><i class="fa fa-cog"></i></a>
+                <div class="content-theme-setting">
+                    <select id="list-style" class="form-control">
+                        <option value="style1">Flat Squared style</option>
+                        <option value="style2">Flat Rounded style</option>
+                        <option value="style3" selected="selected">Flat Border style</option>
+                    </select>
+                </div>
+            </div>*@
+        <!--END THEME SETTING-->
+        <!--BEGIN BACK TO TOP-->
+        @*<a id="totop" href="#"><i class="fa fa-angle-up"></i></a>*@
+        <!--END BACK TO TOP-->
+        <!--BEGIN TOPBAR-->
+        <div id="header-topbar-option-demo" class="page-header-topbar">
+            <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-fixed-top">
+                <div class="navbar-header">
+                    <button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+                    <a id="logo" href="@Url.Action("Index", "Home")" class="navbar-brand"><span class="fa fa-rocket"></span><span class="logo-text">PPRF</span><span style="display: none" class="logo-text-icon">µ</span></a>
+                </div>
+                <div class="topbar-main">
+                    <a id="menu-toggle" href="#" class="hidden-xs"><i class="fa fa-bars"></i></a>
+
+                    @*<form id="topbar-search" action="" method="" class="hidden-sm hidden-xs">
+                            <div class="input-icon right text-white"><a href="#"><i class="fa fa-search"></i></a><input type="text" placeholder="Search here..." class="form-control text-white" /></div>
+                        </form>*@
+                    @*<div class="news-update-box hidden-xs">
+                            <span class="text-uppercase mrm pull-left text-white">News:</span>
+                            <ul id="news-update" class="ticker list-unstyled">
+                                <li>Welcome to KAdmin - Responsive Multi-Style Admin Template</li>
+                                <li>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque.</li>
+                            </ul>
+                        </div>*@
+                    <ul class="nav navbar navbar-top-links navbar-right mbn">
+                        @*<li class="dropdown">
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-bell fa-fw"></i><span class="badge badge-green">3</span></a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-envelope fa-fw"></i><span class="badge badge-orange">7</span></a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i><span class="badge badge-yellow">8</span></a>
+
+                            </li>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown topbar-user">
+                                <a data-hover="dropdown" href="#" class="dropdown-toggle">
+                                    @*<img src="/Content/images/avatar/48.jpg" alt="" class="img-responsive img-circle" />&nbsp;*@
+                                    <i class="fa fa-user-circle"></i>&nbsp;
+                                    <span class="hidden-xs">@User.Identity.GetFullName()</span>&nbsp;<span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-user pull-right">
+                                    @*<li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
+                                        <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
+                                        <li><a href="#"><i class="fa fa-envelope"></i>My Inbox<span class="badge badge-danger">3</span></a></li>
+                                        <li><a href="#"><i class="fa fa-tasks"></i>My Tasks<span class="badge badge-success">7</span></a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>*@
+                                    <li><a href="@Url.Action("LogOff", "Account")"><i class="fa fa-key"></i> Log Out</a></li>
+                                    <li><a href="@Url.Action("ChangePassword", "Account")"><i class="fa fa-user-secret"></i> Change Password</a></li>
+                                </ul>
+                            </li>
+                        }
+                        @*<li id="topbar-chat" class="hidden-xs"><a href="javascript:void(0)" data-step="4" data-intro="&lt;b&gt;Form chat&lt;/b&gt; keep you connecting with other coworker" data-position="left" class="btn-chat"><i class="fa fa-comments"></i><span class="badge badge-info">3</span></a></li>*@
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <!--END TOPBAR-->
+
+
+        <div id="wrapper" style="margin-top:50px;">
+            <!--BEGIN SIDEBAR MENU-->
+            <nav id="sidebar" role="navigation" data-step="2"
+                 data-position="right" class="navbar-default navbar-static-side" style="position:fixed">
+                <div class="sidebar-collapse menu">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <form name="__AjaxAntiForgeryForm" novalidate>
+                            <input name="__RequestVerificationToken" type="hidden" value="@GetAntiForgeryToken()" />
+                        </form>
+                        <ul id="side-menu" class="nav">
+                            <div class="clearfix"></div>
+                            @if (User.IsInRole("Admin") || User.IsInRole("Operator"))
+                            {
+                                <li>
+                                    <a href="@Url.Action("Index", "Home")">
+                                        <i class="fa fa-tachometer fa-fw">
+                                            <div class="icon-bg bg-orange"></div>
+                                        </i>
+                                        <span class="menu-title">Home</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0)">
+                                        <i class="fa fa-cog fa-fw">
+                                            <!--<div class="icon-bg bg-violet"></div>-->
+                                        </i><span class="menu-title">Manage</span>
+                                    </a>
+                                    <ul class="nav nav-second-level">
+                                        @if (User.IsInRole("Admin") || User.IsInRole("Operator"))
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("Payees", "Settings")">
+                                                    <i class="fa fa-users fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Payees</span>
+                                                </a>
+                                            </li>
+                                        }
+                                        @if (User.IsInRole("Admin"))
+                                        {
+                                            <li>
+                                                <a href="@Url.Action("Users", "Settings")">
+                                                    <i class="fa fa-user fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Users</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("PayingEntities", "Settings")">
+                                                    <i class="fa fa-users fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Paying Entities</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Currency", "Settings")">
+                                                    <i class="fa fa-dollar fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Currencies</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Countries", "Settings")">
+                                                    <i class="fa fa-flag fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Countries</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("ExpenseTypes", "Settings")">
+                                                    <i class="fa fa-money fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Expense Types</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("FrequencyTypes", "Settings")">
+                                                    <i class="fa fa-clock-o fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Frequency Types</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("PaymentMethods", "Settings")">
+                                                    <i class="fa fa-credit-card fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Payment Methods</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("Department", "Settings")">
+                                                    <i class="fa fa-sitemap fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Departments</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("DepartmentsAccount", "Settings")">
+                                                    <i class="fa fa-list-alt fa-fw">
+                                                        <!--<div class="icon-bg bg-violet"></div>-->
+                                                    </i><span class="menu-title">Departments Account</span>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("RequestType", "Settings")">
+                                                    <i class="fa fa-chevron-circle-down fa-fw">                                                       
+                                                    </i><span class="menu-title">Request Type</span>
+                                                </a>
+                                            </li>
+                                        }
+                                    </ul>
+                                </li>
+                                if (currentUserPermissions.Contains("Close PO/PPRF"))
+                                {
+                                    <li>
+                                        <a href="@Url.Action("ApprovedRequests", "Home")">
+                                            <i class="fa fa-file fa-fw">
+                                                <!--<div class="icon-bg bg-violet"></div>-->
+                                            </i><span class="menu-title">Approved Request(s)</span>
+                                        </a>
+                                    </li>
+								}
+							}
+							else if (User.IsInRole("Viewer"))
+							{
+
+							}
+                        </ul>
+                    }
+                </div>
+            </nav>
+            <!--END SIDEBAR MENU-->
+            <!--BEGIN PAGE WRAPPER-->
+            <div id="page-wrapper">
+
+                <!--BEGIN TITLE & BREADCRUMB PAGE-->
+                <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+                    <div class="page-header pull-left">
+                        <div class="page-title">
+                            @ViewBag.Title
+                        </div>
+                    </div>
+                    <ol class="breadcrumb page-breadcrumb pull-right">
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="@Url.Action("Index", "Home")">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="hidden"><a href="#">@ViewBag.Title</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">@ViewBag.Title</li>
+                    </ol>
+                    <div class="clearfix">
+                    </div>
+                </div>
+                <!--END TITLE & BREADCRUMB PAGE-->
+                <!--BEGIN CONTENT-->
+                <div class="page-content ng-cloak" ng-app="app">
+                    <div id="tab-general">
+                        <form id="__AjaxAntiForgeryForm">
+                            <input id="antiForgeryToken" type="hidden" name="antiForgeryToken" value="@GetAntiForgeryToken()" />
+                            @*@Html.AntiForgeryToken()*@
+                        </form>
+                        @RenderBody()
+                    </div>
+                </div>
+                <!--END CONTENT-->
+
+
+
+
+                <div class="cssload-preloader" id="loading" style="z-index:10000">
+                    <div class="cssload-preloader-box">
+                        <div>L</div>
+                        <div>o</div>
+                        <div>a</div>
+                        <div>d</div>
+                        <div>i</div>
+                        <div>n</div>
+                        <div>g</div>
+                    </div>
+                </div>
+
+
+
+                <div id="flash-alert" style="display: none;">
+                    <div id="innerMessage" class="pull-left"></div>
+                    <div class="pull-right"><a href="javascript:hideAlert()"><i class="fa fa"></i>Dismiss</a></div>
+                </div>
+
+
+                <!--BEGIN FOOTER-->
+                <div id="footer">
+                    <div class="copyright">
+                        <a href="http://www..com">@DateTime.Now.Year © Payment Processing Request Form.</a>
+                    </div>
+                </div>
+                <!--END FOOTER-->
+            </div>
+            <!--END PAGE WRAPPER-->
+        </div>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/common")
+
+    <script src="~/Scripts/PageScripts/app.js"></script>
+
+
+    @RenderSection("Scripts", required: false)
+
+
+    <script type="text/javascript">
+        var timeout = 15000;
+        $(document).ready(function () {
+            var jsonResponse = "@ViewBag.Response";
+            if (jsonResponse !== "") {
+                var responseObject = JSON.parse(jsonResponse);
+                if (responseObject.ResponseType === "success") {
+                    showSuccess(responseObject.Message);
+                } else {
+                    showError(responseObject.Message);
+                }
+            }
+        });
+
+        function showSuccess(message) {
+            var $flashMessage = $('#flash-alert');
+            $flashMessage.addClass('flash-success').find('#innerMessage').html(message);
+            $flashMessage.slideDown('slow');
+            setTimeout(function () {
+                hideAlert();
+            }, timeout);
+        }
+        function showError(message) {
+            var $flashMessage = $('#flash-alert');
+            $flashMessage.addClass('flash-error').find('#innerMessage').html(message);
+            $flashMessage.slideDown('slow');
+            setTimeout(function () {
+                hideAlert();
+            }, timeout);
+        }
+        function hideAlert() {
+            var $flashMessage = $('#flash-alert');
+            $flashMessage.slideUp('slow', function () {
+                var $this = $(this);
+                $this.find('#innerMessage').html('');
+                $this.removeClass();
+            });
+        }
+    </script>
+</body>
+</html>

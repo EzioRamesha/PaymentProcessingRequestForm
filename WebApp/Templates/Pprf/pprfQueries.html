@@ -1,0 +1,21 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+        <h2>Queries for PPRF/PO # {{pprfNumber}}</h2>
+    </div>
+
+    <div class="panel-body pal">
+        <ul>
+            <li ng-repeat="query in Queries" style="margin-top:20px;">
+                <div style="width:100%; display:block">
+                    <span><b>Q.</b> <b>{{query.Question}}</b></span>
+                </div>
+                <div style="width:100%; display:block">
+                    <span><b>A.</b> {{query.Answer}}</span>
+                </div>
+            </li>
+        </ul>
+        <div class="text-right">
+            <a class="btn btn-sm btn-primary" ng-click="close()"><i class="fa fa-close"></i> Close</a>
+        </div>
+    </div>
+</div>

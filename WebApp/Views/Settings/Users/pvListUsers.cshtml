@@ -1,0 +1,42 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        System Users
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!Users.length || Users.length==0">
+            <span class="info">
+                No user(s) yet.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered table-condensed" ng-if="Users.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Department</th>
+                    <th>Designation</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in Users">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{user.Name}}</td>
+                    <td>{{user.Email}}</td>
+                    <td>{{user.Department.Name}}</td>
+                    <td>{{user.Designation}}</td>
+                    <td>{{user.IsEnabled?"Active":"Inactive"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit User" ng-click="editUserDialog(user)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!user.IsEnabled" ng-click="enable(user)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="user.IsEnabled" ng-click="disable(user)"><i class="fa fa-remove"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-dark btn-xs" title="Reset Password" ng-click="resetPassword(user.Email)"><i class="fa fa-repeat"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

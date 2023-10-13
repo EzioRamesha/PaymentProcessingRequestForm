@@ -1,0 +1,123 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">
+                            Name
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-user"></i>
+                            <input id="Name" type="text" placeholder="" class="form-control" data-ng-model="editPayee.Name"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Phone" class="control-label">
+                            Phone
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-phone"></i>
+                            <input id="Phone" type="text" placeholder="" class="form-control" data-ng-model="editPayee.Phone"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Fax" class="control-label">
+                            Fax
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-fax"></i>
+                            <input id="Fax" type="text" placeholder="" class="form-control" data-ng-model="editPayee.Fax"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="AddressLine1" class="control-label">
+                            Address Line 1
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-address-card"></i>
+                            <input id="AddressLine1" type="text" placeholder="" class="form-control" data-ng-model="editPayee.AddressLine1"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="AddressLine2" class="control-label">
+                            Address Line 2
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-address-card"></i>
+                            <input id="AddressLine2" type="text" placeholder="" class="form-control" data-ng-model="editPayee.AddressLine2"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="AddressLine3" class="control-label">
+                            Address Line 3
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-address-card"></i>
+                            <input id="AddressLine3" type="text" placeholder="" class="form-control" data-ng-model="editPayee.AddressLine3"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="HotelCountry" class="control-label">
+                            Hotel Country
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-flag"></i>
+                            <!--<input id="AddressLine3" type="text" placeholder="" class="form-control" data-ng-model="newPayee.AddressLine3" />-->
+                            <select name="HotelCountry" class="form-control input-sm" data-ng-model="editPayee.CountryId" data-ng-required="true"
+                                    data-ng-options="country.Id as country.Name for country in Countries | orderBy:'Name'">
+                                <option value="" disabled>-- Select --</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="HotelName" class="control-label">
+                            Hotel Name
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-hotel"></i>
+                            <input id="HotelName" type="text" placeholder="" class="form-control input-sm" data-ng-model="editPayee.HotelName" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-right">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="update(editPayee)">Update</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="reset()">Reset</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>

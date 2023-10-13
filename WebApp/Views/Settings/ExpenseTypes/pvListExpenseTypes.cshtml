@@ -1,0 +1,37 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        ExpenseTypes
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!ExpenseTypes.length">
+            <span class="info">
+                No expense type added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="ExpenseTypes.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    @*<th>Code</th>*@
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="expenseType in ExpenseTypes">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{expenseType.Name}}</td>
+                    @*<td>{{expenseType.Code}}</td>*@
+                    <td>{{expenseType.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Expense Type" ng-click="showEditExpenseTypeDialog(expenseType)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!expenseType.IsEnabled" ng-click="enable(expenseType)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="expenseType.IsEnabled" ng-click="disable(expenseType)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

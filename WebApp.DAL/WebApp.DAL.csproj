@@ -1,0 +1,504 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{65049B8F-52F9-4294-A9E5-686F3AD267CC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebApp.DAL</RootNamespace>
+    <AssemblyName>WebApp.DAL</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'NewDebug|AnyCPU'">
+    <OutputPath>bin\NewDebug\</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.2.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.2.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.2.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=2.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.2.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.1.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.1.1\lib\net45\Remotion.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SendGrid, Version=9.28.1.0, Culture=neutral, PublicKeyToken=4f047e93159395ca, processorArchitecture=MSIL">
+      <HintPath>..\packages\SendGrid.9.28.1\lib\net452\SendGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="StarkbankEcdsa, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b2e6337a5d77bfbc, processorArchitecture=MSIL">
+      <HintPath>..\packages\starkbank-ecdsa.1.3.3\lib\net452\StarkbankEcdsa.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.3.0\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.3.1\lib\portable-net45+win8+wpa81\System.Diagnostics.DiagnosticSource.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.3.0\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\MoneyMaskBundleConfig.cs" />
+    <Compile Include="BAL\BudgetOrderBAL.cs" />
+    <Compile Include="BAL\CancelPPRFReasonTypeBAL.cs" />
+    <Compile Include="BAL\ClosePPRFReasonTypesBAL.cs" />
+    <Compile Include="BAL\CountryBAL.cs" />
+    <Compile Include="BAL\CurrencyTypeBAL.cs" />
+    <Compile Include="BAL\DepartmentBAL.cs" />
+    <Compile Include="BAL\ExpenseTypeBAL.cs" />
+    <Compile Include="BAL\FrequencyTypeBAL.cs" />
+    <Compile Include="BAL\GeneralSettingsBAL.cs" />
+    <Compile Include="BAL\DepartmentsAccountBAL.cs" />
+    <Compile Include="BAL\PayeeBAL.cs" />
+    <Compile Include="BAL\PayingEntityBAL.cs" />
+    <Compile Include="BAL\PaymentMethodBAL.cs" />
+    <Compile Include="BAL\RejectTypeBAL.cs" />
+    <Compile Include="BAL\RequestFormBAL.cs" />
+    <Compile Include="BAL\TaxTypeBAL.cs" />
+    <Compile Include="BAL\UserBAL.cs" />
+    <Compile Include="Config\IdentityConfig.cs" />
+    <Compile Include="Custom\DecimalPrecisionAttribute.cs" />
+    <Compile Include="DAL\BudgetOrderDAL.cs" />
+    <Compile Include="DAL\CancelPPRFReasonTypeDAL.cs" />
+    <Compile Include="DAL\ClosePPRFReasonTypesDAL.cs" />
+    <Compile Include="DAL\CountryDAL.cs" />
+    <Compile Include="DAL\CurrencyTypeDAL.cs" />
+    <Compile Include="DAL\DALBase.cs" />
+    <Compile Include="DAL\DepartmentDAL.cs" />
+    <Compile Include="DAL\ExpenseTypeDAL.cs" />
+    <Compile Include="DAL\FrequencyTypeDAL.cs" />
+    <Compile Include="DAL\GeneralSettingsDAL.cs" />
+    <Compile Include="DAL\DepartmentsAccountDAL.cs" />
+    <Compile Include="DAL\PayeeDAL.cs" />
+    <Compile Include="DAL\PayingEntityDAL.cs" />
+    <Compile Include="DAL\PaymentMethodDAL.cs" />
+    <Compile Include="DAL\PaymentRequestDocsDAL.cs" />
+    <Compile Include="DAL\RejectTypesDAL.cs" />
+    <Compile Include="DAL\RequestFormDAL.cs" />
+    <Compile Include="DAL\TaxTypeDAL.cs" />
+    <Compile Include="DAL\UserDAL.cs" />
+    <Compile Include="Data\ApplicationGroup.cs" />
+    <Compile Include="Data\ApplicationUserGroup.cs" />
+    <Compile Include="Data\ApproverRequestQuestion.cs" />
+    <Compile Include="Data\CancelPPRFReasonTypes.cs" />
+    <Compile Include="Data\ClosePPRFReasonTypes.cs" />
+    <Compile Include="Data\Country.cs" />
+    <Compile Include="Data\Currency.cs" />
+    <Compile Include="Data\Department.cs" />
+    <Compile Include="Data\EntityAmountRange.cs" />
+    <Compile Include="Data\ExpenseType.cs" />
+    <Compile Include="Data\FrequencyType.cs" />
+    <Compile Include="Data\GoodsAndService.cs" />
+    <Compile Include="Data\IdentityModels.cs" />
+    <Compile Include="Data\DepartmentsAccount.cs" />
+    <Compile Include="Data\Payee.cs" />
+    <Compile Include="Data\PayeeBankAccountDetail.cs" />
+    <Compile Include="Data\PayingEntity.cs" />
+    <Compile Include="Data\PaymentMethod.cs" />
+    <Compile Include="Data\PaymentRequestDocuments.cs" />
+    <Compile Include="Data\PaymentRequestForm.cs" />
+    <Compile Include="Data\Permission.cs" />
+    <Compile Include="Data\RejectTypes.cs" />
+    <Compile Include="Data\RequestApprover.cs" />
+    <Compile Include="Data\TaxType.cs" />
+    <Compile Include="Data\User.cs" />
+    <Compile Include="Data\UserPermission.cs" />
+    <Compile Include="Exceptions\UnableToParseSaveRequestException.cs" />
+    <Compile Include="Helpers\Constants.cs" />
+    <Compile Include="Helpers\EmailHelper.cs" />
+    <Compile Include="Helpers\ExtensionMethods.cs" />
+    <Compile Include="Helpers\GeneralHelper.cs" />
+    <Compile Include="Helpers\Token.cs" />
+    <Compile Include="Migrations\201707110241540_Initial.cs" />
+    <Compile Include="Migrations\201707110241540_Initial.Designer.cs">
+      <DependentUpon>201707110241540_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707110947049_addedDocumentType.cs" />
+    <Compile Include="Migrations\201707110947049_addedDocumentType.Designer.cs">
+      <DependentUpon>201707110947049_addedDocumentType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707131007016_UpdateCurrencyTrackDetails.cs" />
+    <Compile Include="Migrations\201707131007016_UpdateCurrencyTrackDetails.Designer.cs">
+      <DependentUpon>201707131007016_UpdateCurrencyTrackDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707170659407_CustomExchangeRates.cs" />
+    <Compile Include="Migrations\201707170659407_CustomExchangeRates.Designer.cs">
+      <DependentUpon>201707170659407_CustomExchangeRates.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707180424149_changeDocumentPathToSavedName.cs" />
+    <Compile Include="Migrations\201707180424149_changeDocumentPathToSavedName.Designer.cs">
+      <DependentUpon>201707180424149_changeDocumentPathToSavedName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201707260331542_AddUserPermissions.cs" />
+    <Compile Include="Migrations\201707260331542_AddUserPermissions.Designer.cs">
+      <DependentUpon>201707260331542_AddUserPermissions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708010342482_AddClosingForPPRF.cs" />
+    <Compile Include="Migrations\201708010342482_AddClosingForPPRF.Designer.cs">
+      <DependentUpon>201708010342482_AddClosingForPPRF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708020831512_RemoveLogoPath_AddLogoName.cs" />
+    <Compile Include="Migrations\201708020831512_RemoveLogoPath_AddLogoName.Designer.cs">
+      <DependentUpon>201708020831512_RemoveLogoPath_AddLogoName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708040931503_addClosedById.cs" />
+    <Compile Include="Migrations\201708040931503_addClosedById.Designer.cs">
+      <DependentUpon>201708040931503_addClosedById.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708160345352_AddPPRFNoField.cs" />
+    <Compile Include="Migrations\201708160345352_AddPPRFNoField.Designer.cs">
+      <DependentUpon>201708160345352_AddPPRFNoField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708170140559_AddStatusAndIsCancelledFields.cs" />
+    <Compile Include="Migrations\201708170140559_AddStatusAndIsCancelledFields.Designer.cs">
+      <DependentUpon>201708170140559_AddStatusAndIsCancelledFields.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201708250546579_AddHotelNameAndCountry_Payee.cs" />
+    <Compile Include="Migrations\201708250546579_AddHotelNameAndCountry_Payee.Designer.cs">
+      <DependentUpon>201708250546579_AddHotelNameAndCountry_Payee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710230337041_ApproverQuestions.cs" />
+    <Compile Include="Migrations\201710230337041_ApproverQuestions.Designer.cs">
+      <DependentUpon>201710230337041_ApproverQuestions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201710230536216_ApproverQuestion_IsAsked.cs" />
+    <Compile Include="Migrations\201710230536216_ApproverQuestion_IsAsked.Designer.cs">
+      <DependentUpon>201710230536216_ApproverQuestion_IsAsked.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711060239570_CountryOptionalInNewRequest.cs" />
+    <Compile Include="Migrations\201711060239570_CountryOptionalInNewRequest.Designer.cs">
+      <DependentUpon>201711060239570_CountryOptionalInNewRequest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902260400358_PayingEntityAmountRangePPRF.cs" />
+    <Compile Include="Migrations\201902260400358_PayingEntityAmountRangePPRF.Designer.cs">
+      <DependentUpon>201902260400358_PayingEntityAmountRangePPRF.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201902270659345_PayingEntityAmountRangePPRF1.cs" />
+    <Compile Include="Migrations\201902270659345_PayingEntityAmountRangePPRF1.Designer.cs">
+      <DependentUpon>201902270659345_PayingEntityAmountRangePPRF1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202012170201181_PPRF_Enhancement_Dec2020_P1.cs" />
+    <Compile Include="Migrations\202012170201181_PPRF_Enhancement_Dec2020_P1.Designer.cs">
+      <DependentUpon>202012170201181_PPRF_Enhancement_Dec2020_P1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103151013417_PPRF_Enhancement_Mar2021.cs" />
+    <Compile Include="Migrations\202103151013417_PPRF_Enhancement_Mar2021.Designer.cs">
+      <DependentUpon>202103151013417_PPRF_Enhancement_Mar2021.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103170611171_PPRF_Enhancement_Mar2021_Part2.cs" />
+    <Compile Include="Migrations\202103170611171_PPRF_Enhancement_Mar2021_Part2.Designer.cs">
+      <DependentUpon>202103170611171_PPRF_Enhancement_Mar2021_Part2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103180650058_PPRF_Enhancement_Mar2021_Part3.cs" />
+    <Compile Include="Migrations\202103180650058_PPRF_Enhancement_Mar2021_Part3.Designer.cs">
+      <DependentUpon>202103180650058_PPRF_Enhancement_Mar2021_Part3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103230144050_PPRF_Enhancement_Mar2021_Part4.cs" />
+    <Compile Include="Migrations\202103230144050_PPRF_Enhancement_Mar2021_Part4.Designer.cs">
+      <DependentUpon>202103230144050_PPRF_Enhancement_Mar2021_Part4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202103231020120_PPRF_Enhancement_Mar2021_Part5.cs" />
+    <Compile Include="Migrations\202103231020120_PPRF_Enhancement_Mar2021_Part5.Designer.cs">
+      <DependentUpon>202103231020120_PPRF_Enhancement_Mar2021_Part5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202210070904101_PPRF_Enhancement_Sep2022_Part6.cs" />
+    <Compile Include="Migrations\202210070904101_ApplicationDbContext.Designer.cs">
+      <DependentUpon>202210070904101_PPRF_Enhancement_Sep2022_Part6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202212280816137_PPRF_Enhancement_Dec2022_Part7.cs" />
+    <Compile Include="Migrations\202212280816137_PPRF_Enhancement_Dec2022_Part7.Designer.cs">
+      <DependentUpon>202212280816137_PPRF_Enhancement_Dec2022_Part7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AppRoles.cs" />
+    <Compile Include="Models\BudgetOrderModels.cs" />
+    <Compile Include="Models\CancelPPRFReasonTypeViewModels.cs" />
+    <Compile Include="Models\ClosePPRFReasonTypesViewModels.cs" />
+    <Compile Include="Models\CountryViewModels.cs" />
+    <Compile Include="Models\CurrencyTypeViewModels.cs" />
+    <Compile Include="Models\DepartmentViewModels.cs" />
+    <Compile Include="Models\EntityAmountRangeViewModels.cs" />
+    <Compile Include="Models\ExpenseTypeViewModels.cs" />
+    <Compile Include="Models\FrequencyTypeViewModels.cs" />
+    <Compile Include="Models\DepartmentsAccountViewModels.cs" />
+    <Compile Include="Models\Paging.cs" />
+    <Compile Include="Models\PayeeViewModels.cs" />
+    <Compile Include="Models\PayingEntityViewModels.cs" />
+    <Compile Include="Models\PaymentMethodViewModels.cs" />
+    <Compile Include="Models\PaymentRequestFormViewModels.cs" />
+    <Compile Include="Models\RejectTypesViewModels.cs" />
+    <Compile Include="Models\ResponseModels\ApproverQuestionResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\CancelPPRFReasonTypeResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\ChangePasswordResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\ClosePPRFReasonTypesResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\CurrencyResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\DepartmentResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\DepartmentsAccountResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\ExpenseTypeResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\FileDownloadModel.cs" />
+    <Compile Include="Models\ResponseModels\FrequencyTypeResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\PayeeResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\PayingEntityResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\PaymentMethodResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\QuestionAnswerResponseModels.cs" />
+    <Compile Include="Models\ResponseModels\RejectTypeResponseModel.cs" />
+    <Compile Include="Models\ResponseModels\RequestApprovalResponse.cs" />
+    <Compile Include="Models\ResponseModels\ResponseObject.cs" />
+    <Compile Include="Models\ResponseModels\SaveRequestFormResponse.cs" />
+    <Compile Include="Models\ResponseModels\SendEmailResponse.cs" />
+    <Compile Include="Models\ResponseModels\UpdateClarificationResponse.cs" />
+    <Compile Include="Models\ResponseModels\UserResponseModels.cs" />
+    <Compile Include="Models\TaxTypeViewModels.cs" />
+    <Compile Include="Models\UserViewModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service References\EmailWebService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Service References\EmailWebService\ASPEmailWS.wsdl" />
+    <None Include="Service References\EmailWebService\WebApp.DAL.EmailWebService.eMailSendOutResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\EmailWebService\WebApp.DAL.EmailWebService.eMailSendOutWithAttachmentResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\EmailWebService\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmailWebService\ASPEmailWS.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmailWebService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmailWebService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\EmailWebService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201707110241540_Initial.resx">
+      <DependentUpon>201707110241540_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707110947049_addedDocumentType.resx">
+      <DependentUpon>201707110947049_addedDocumentType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707131007016_UpdateCurrencyTrackDetails.resx">
+      <DependentUpon>201707131007016_UpdateCurrencyTrackDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707170659407_CustomExchangeRates.resx">
+      <DependentUpon>201707170659407_CustomExchangeRates.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707180424149_changeDocumentPathToSavedName.resx">
+      <DependentUpon>201707180424149_changeDocumentPathToSavedName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201707260331542_AddUserPermissions.resx">
+      <DependentUpon>201707260331542_AddUserPermissions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708010342482_AddClosingForPPRF.resx">
+      <DependentUpon>201708010342482_AddClosingForPPRF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708020831512_RemoveLogoPath_AddLogoName.resx">
+      <DependentUpon>201708020831512_RemoveLogoPath_AddLogoName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708040931503_addClosedById.resx">
+      <DependentUpon>201708040931503_addClosedById.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708160345352_AddPPRFNoField.resx">
+      <DependentUpon>201708160345352_AddPPRFNoField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708170140559_AddStatusAndIsCancelledFields.resx">
+      <DependentUpon>201708170140559_AddStatusAndIsCancelledFields.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201708250546579_AddHotelNameAndCountry_Payee.resx">
+      <DependentUpon>201708250546579_AddHotelNameAndCountry_Payee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710230337041_ApproverQuestions.resx">
+      <DependentUpon>201710230337041_ApproverQuestions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201710230536216_ApproverQuestion_IsAsked.resx">
+      <DependentUpon>201710230536216_ApproverQuestion_IsAsked.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711060239570_CountryOptionalInNewRequest.resx">
+      <DependentUpon>201711060239570_CountryOptionalInNewRequest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902260400358_PayingEntityAmountRangePPRF.resx">
+      <DependentUpon>201902260400358_PayingEntityAmountRangePPRF.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201902270659345_PayingEntityAmountRangePPRF1.resx">
+      <DependentUpon>201902270659345_PayingEntityAmountRangePPRF1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202012170201181_PPRF_Enhancement_Dec2020_P1.resx">
+      <DependentUpon>202012170201181_PPRF_Enhancement_Dec2020_P1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103151013417_PPRF_Enhancement_Mar2021.resx">
+      <DependentUpon>202103151013417_PPRF_Enhancement_Mar2021.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103170611171_PPRF_Enhancement_Mar2021_Part2.resx">
+      <DependentUpon>202103170611171_PPRF_Enhancement_Mar2021_Part2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103180650058_PPRF_Enhancement_Mar2021_Part3.resx">
+      <DependentUpon>202103180650058_PPRF_Enhancement_Mar2021_Part3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103230144050_PPRF_Enhancement_Mar2021_Part4.resx">
+      <DependentUpon>202103230144050_PPRF_Enhancement_Mar2021_Part4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202103231020120_PPRF_Enhancement_Mar2021_Part5.resx">
+      <DependentUpon>202103231020120_PPRF_Enhancement_Mar2021_Part5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202210070904101_ApplicationDbContext.resx">
+      <DependentUpon>202210070904101_PPRF_Enhancement_Sep2022_Part6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202212280816137_PPRF_Enhancement_Dec2022_Part7.resx">
+      <DependentUpon>202212280816137_PPRF_Enhancement_Dec2022_Part7.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomData\" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

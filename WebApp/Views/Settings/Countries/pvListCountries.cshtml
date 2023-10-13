@@ -1,0 +1,39 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Countries
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!Countries.length">
+            <span class="info">
+                No country added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="Countries.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Code</th>
+                    @*<th>Currency</th>*@
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="country in Countries">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{country.Name}}</td>
+                    <td>{{country.Code}}</td>
+                    @*<td>{{country.Currency}}</td>*@
+                    <td>{{country.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Country" ng-click="editCountryDialog(country)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!country.IsEnabled" ng-click="enable(country)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="country.IsEnabled" ng-click="disable(country)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

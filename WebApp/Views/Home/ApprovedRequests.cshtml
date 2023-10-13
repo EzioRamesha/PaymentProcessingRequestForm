@@ -1,0 +1,36 @@
+﻿@model WebApp.DAL.Models.ApprovedRequestsHomeViewModel
+
+@{
+    ViewBag.Title = "Approved PO/PPRF";
+}
+
+@section Scripts{
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+    <script type="text/javascript" src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+    @*<script src="~/Scripts/PageScripts/Settings/PayingEntityManager.js"></script>*@
+    <script type="text/javascript" src="~/Scripts/PageScripts/Home/closeRequestController.js"></script>
+}
+@section Styles{
+    <style type="text/css">
+        .app-modal-window .modal-dialog {
+            width: 1200px;
+        }
+    </style>
+}
+
+<div ng-controller="closeRequest" data-ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-md-12 col-lg-12">
+            @Html.Partial("~/Views/Home/pvPendingClose.cshtml")
+        </div>
+    </div>
+
+
+    <div class="row mbl">
+        <div class="col-md-12 col-lg-12">
+            @Html.Partial("~/Views/Home/pvClosedRequests.cshtml")
+        </div>
+    </div>
+</div>

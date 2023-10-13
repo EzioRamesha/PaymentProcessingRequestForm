@@ -1,0 +1,84 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">
+                            Name
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-user"></i>
+                            <input id="Name" type="text" placeholder="" class="form-control" data-ng-model="editUser.Name"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Email" class="control-label">
+                            E-mail
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-envelope"></i>
+                            <input id="Email" type="text" placeholder="" class="form-control" data-ng-model="editUser.Email"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Department</label>
+                        <select class="form-control input-sm" data-ng-model="editUser.Department" data-ng-options="department as department.Name for department in Departments">
+                            <option value="" selected>Department</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="Email" class="control-label">
+                            Designation
+                        </label>
+                        <div class="input-icon right">
+                            <i class="fa fa-cog"></i>
+                            <input id="Designation" type="text" placeholder="" class="form-control" data-ng-model="editUser.Designation"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br/>
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label ">Approver/Originator</label>
+                </div>
+                <div class="input-icon right col-md-3" ng-repeat="group in editUser.SelectedGroups">
+                    <input type="checkbox" ng-value="group" ng-model="group.Selected" ng-checked="group.Selected" /> {{ group.Name }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <label class="control-label ">Permissions</label>
+                </div>
+                <div class="input-icon right col-md-4" ng-repeat="permission in editUser.Permissions">
+                    <input type="checkbox" ng-value="permission" ng-model="permission.IsEnabled" ng-checked="permission.IsEnabled" /> {{ permission.Name }}
+                </div>
+            </div>
+
+
+            <div class="text-right">
+                <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="update(editUser)">Update</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="reset()">Reset</a>
+                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()">Close</a>
+            </div>
+        </div>        
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Manage Payment Methods";
+}
+
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PaymentMethodManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PaymentMethodController.js"></script>
+}
+
+<div ng-controller="PaymentMethodController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="showNewPaymentMethodDialog()"><i class="fa fa-plus"></i> Add Payment Method</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/PaymentMethods/pvListPaymentMethods.cshtml")
+        </div>
+    </div>
+</div>
+

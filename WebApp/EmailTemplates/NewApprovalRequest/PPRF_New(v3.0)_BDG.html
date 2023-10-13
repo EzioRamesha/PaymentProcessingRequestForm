@@ -1,0 +1,323 @@
+﻿
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+
+
+    <div>
+        <table cellspacing="0" cellpadding="0" align="center">
+            <tr>
+                <td width="804" background="http://holiday.mynetwork.com.sa/wp-content/uploads/2015/02/voucher-bg.jpg" style="background-position:bottom;background-repeat:no-repeat" valign="top">
+
+                    <table width="900" border="0" cellspacing="0" cellpadding="3" align="center">
+                        <tr>
+                            <td colspan="5">
+                                <font face="Tahoma" size="2">
+                                    <p>
+                                        Dear {{Current Approver}},<br><br>
+                                        Please kindly review and approve this PRF:<br>
+                                        <b>Pay to:</b> {{PayeeName}}<br>
+                                        <b>Purpose:</b> {{Description}}<br>
+                                        <b>Amount Due:</b> {{CurrencyCode}} {{Total}}
+                                    </p>
+                                </font>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" align="center">
+            <tr>
+                <td style="width:45%;border-color:black;background-color:black;text-align:center" rowspan="3">
+                    <h2><span style="color:#ffffff"><font face="Tahoma">PAYMENT REQUEST FORM (PPRF)</font></span></h2>
+                </td>
+                <td style="width:30%;border:solid 1px #cecece" rowspan="3"><font face="Tahoma" size="2"><img alt="{{PayingEntityName}}" src="{{PayingEntityLogo}}" height="95" width="150"></font></td>
+
+                <td style="width:25%;border:solid 1px #cecece" colspan="2"><font face="Tahoma" size="2"><strong>PRF No:</strong> {{PPRFNo}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>PRF Date:</strong></font></td>
+                <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PPRFDate}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Payment Due:</strong></font></td>
+                <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PaymentDue}}</font></td>
+            </tr>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <tr>
+                <td style="width:50%;border:solid 1px #cecece" colspan="2"><font face="Tahoma" size="2"></font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Document Status:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{DocumentStatus}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Paying Entity:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PayingEntityName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Document Type:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{DocumentType}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Country/Region:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">-</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Month/Year:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{period}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Department:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{DepartmentName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Frequency:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{FrequencyTypeName}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Payment Method:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PaymentMethodName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Nature of Expense:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{ExpenseTypeName}}</font></td>
+            </tr>
+            <tr>
+                <td colspan="5"><font face="Tahoma" size="1"> </font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Payee:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PayeeName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Payee Bank:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeBankName}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Description:</strong></font></td>
+                <td style="width:82.5%;border:solid 1px #cecece" colspan="3"><font face="Tahoma" size="2">{{Description}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Remarks:</strong></font></td>
+                <td style="width:82.5%;border:solid 1px #cecece" colspan="3"><font face="Tahoma" size="2">{{Remarks}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Budget Validity:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{BudgetValidFrom}} - {{BudgetValidTo}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Restricted Payee Only?</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{RestrictedPayeeOnlyFlag}}</font></td>
+            </tr>
+            <tr>
+                <td colspan="5"><font face="Tahoma" size="1"> </font></td>
+            </tr>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <thead>
+                <tr>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>#</strong></font></td>
+                    <td style="width:41%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Particular of Purchase(s) of Goods or Services (1)</strong></font></td>
+                    <td style="width:9.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Tax Type</strong></font></td>
+                    <td style="width:10%;border:solid 1px #cecece" align="right"><font face="Tahoma" size="2"><strong>Qty</strong></font></td>
+                    <td style="width:12.5%;border:solid 1px #cecece" align="right"><font face="Tahoma" size="2"><strong>{{CurrencyCode}} Amount</strong></font></td>
+                    <td style="width:12.5%;border:solid 1px #cecece" align="right">
+                        <font face="Tahoma" size="2">
+                            <strong>USD Amount</strong><br>
+                            (@ {{USDExRate}})
+                        </font>
+                    </td>
+                    <td style="width:12.5%;border:solid 1px #cecece" align="right">
+                        <font face="Tahoma" size="2">
+                            <strong>EUR Amount</strong><br>
+                            (@ {{EURExRate}})
+                        </font>
+                    </td>
+                </tr>
+            </thead>
+            <tbody>
+                {{goodsAndServicesRows}}
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td style="width:50%;border:solid 1px #cecece" colspan="3" rowspan="4">
+                        <font face="Tahoma"><h5>Clarification:</h5></font>
+                        <p><font face="Tahoma" size="2">{{Clarifications}}</font></p>
+                    </td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2"><strong>Sub-Total</strong></font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{SubTotal}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{SubTotalUSD}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{SubTotalEuro}}</font></td>
+                </tr>
+                <tr>
+
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2"><strong>Tax Amt 1</strong></font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmountUSD}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmountEuro}}</font></td>
+                </tr>
+                <tr>
+
+                    <td style="border:solid 1px #cecece" align="right">
+                        <font face="Tahoma" size="2">
+                            <strong>
+                                Tax Amt 2<br>
+                                {{TaxType2Name}}
+                            </strong>
+                        </font>
+                    </td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount2}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount2USD}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount2Euro}}</font></td>
+                </tr>
+                <tr>
+
+                    <td style="border:solid 1px #cecece" align="right">
+                        <font face="Tahoma" size="2">
+                            <strong>
+                                Tax Amt 3<br>
+                                {{TaxType3Name}}
+                            </strong>
+                        </font>
+                    </td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount3}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount3USD}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TaxAmount3Euro}}</font></td>
+                </tr>
+                <tr>
+                    <td style="border:solid 1px #cecece" colspan="3"></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2"><strong>Total</strong></font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{Total}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TotalUSD}}</font></td>
+                    <td style="border:solid 1px #cecece" align="right"><font face="Tahoma" size="2">{{TotalEuro}}</font></td>
+                </tr>
+            </tfoot>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <thead>
+                <tr>
+                    <th style="border:solid 1px #cecece;background-color:#cecece" colspan="7" align="left"><font face="Tahoma" size="2"><strong>Approval Process</strong></font></th>
+                </tr>
+                <tr>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>#</strong></font></td>
+                    <td style="width:19%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Name</strong></font></td>
+                    <td style="width:19%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Position</strong></font></td>
+                    <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Department</strong></font></td>
+                    <td style="width:10%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Approval Status</strong></font></td>
+                    <td style="width:10%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Response Date</strong></font></td>
+                    <td style="width:25%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Remarks</strong></font></td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Originator</strong></font></td>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{OriginatorName}}</font></td>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{OriginatorDesignation}}</font></td>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{OriginatorDepartmentName}}</font></td>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{OriginatorStatus}}</font></td>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{PPRFDate}}</font></td>
+                    <td style="width:2%;border:solid 1px #cecece"></td>
+                </tr>
+                {{approverRows}}
+            </tbody>
+        </table>
+
+
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <thead>
+                <tr>
+                    <th style="border:solid 1px #cecece;background-color:#cecece" colspan="7" align="left"><font face="Tahoma" size="2"><strong>Questions &amp; Answers</strong></font></th>
+                </tr>
+                <tr>
+                    <td style="width:2%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>#</strong></font></td>
+                    <td style="width:19%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>By</strong></font></td>
+                    <td style="width:19%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Query</strong></font></td>
+                    <td style="width:15%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Reason</strong></font></td>
+                </tr>
+            </thead>
+            <tbody>
+                {{QuestionAndAnswerRows}}
+            </tbody>
+        </table>
+
+
+
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <tr>
+                <th style="border:solid 1px #cecece;background-color:#cecece" colspan="7" align="left"><font face="Tahoma" size="2"><strong>Payee Bank Details</strong></font></th>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Bank Name:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeBankName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Payee Address:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeAddressLine1}}<br>{{payeeAddressLine2}}<br>{{payeeAddressLine3}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Account Name:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeAccountName}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Type of Account:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeAccountType}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Account Number:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeAccountNumber}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>IBAN Number:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeIBAN}}</font></td>
+            </tr>
+            <tr>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Swift Code:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeSwift}}</font></td>
+                <td style="width:17.5%;border:solid 1px #cecece"><font face="Tahoma" size="2"><strong>Sort/IFSC Code:</strong></font></td>
+                <td style="width:32.5%;border:solid 1px #cecece"><font face="Tahoma" size="2">{{payeeIFSC}}</font></td>
+            </tr>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" style="border:solid 1px #cecece" align="center">
+            <tr>
+                <td colspan="5"><font face="Tahoma" size="1"> </font></td>
+            </tr>
+            <tr>
+                <td style="width:15%"></td>
+                <td>
+                    <a style="font-size:18pt;color:white;background-color:green;border:2px solid #336600;padding:3px" href="{{baseurlToApproveOrReject}}/pprf/Approve/?v={{lengths}}&token={{token}}">Approve</a>
+                </td>
+                <td style="width: 5%;"></td>
+                <td>
+                    <a style="font-size:18pt;color:white;background-color:red;border:2px solid #db1d13;padding:3px" href="{{baseurlToApproveOrReject}}/pprf/Reject/?v={{lengths}}&token={{token}}">Reject</a>
+                </td>
+                <td style="width: 5%;"></td>
+                <td>
+                    <!--<a style="font-size:18pt;color:white;background-color:orange;border:2px solid #f7a713;padding:3px" href="{{baseurlToApproveOrReject}}/pprf/GetClarification/?v={{lengths}}&token={{token}}">Clarification</a>-->
+                    <a style="font-size:18pt;color:white;background-color:orange;border:2px solid #f7a713;padding:3px" href="{{baseurlToApproveOrReject}}/pprf/AskAQuestion/?v={{lengths}}&token={{token}}">Ask a Question</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="5"><font face="Tahoma" size="1"> </font></td>
+            </tr>
+        </table>
+
+        <table width="900" border="0" cellspacing="0" cellpadding="3" align="center">
+            <tr>
+                <td colspan="5">
+                    <font face="Tahoma" size="2">
+                        <br><br>
+                        Thanks.<br><br>
+                        Regards,<br>
+                        <b>{{OriginatorName}}</b><br>
+                        {{OriginatorDesignation}}<br>
+                        {{OriginatorDepartmentName}}<br><br>
+                        <i>This is system generated document.<i></i></i>
+                    </font>
+                </td>
+
+                <td> </td>
+            </tr>
+        </table>
+
+        <!--</td>
+        </tr>
+        </table>-->
+    </div>
+
+</body>
+</html>

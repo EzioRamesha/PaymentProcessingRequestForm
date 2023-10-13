@@ -1,0 +1,112 @@
+﻿<ul uib-pagination
+    total-items="OriginatorFormsSearchCriteria.Pager.TotalItems"
+    items-per-page="OriginatorFormsSearchCriteria.Pager.ItemsPerPage"
+    ng-model="OriginatorFormsSearchCriteria.Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="refreshOriginatorForms(OriginatorFormsSearchCriteria)" ng-if="pendingRaisedRequests.length"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        <div class="row">
+            Raised By Me
+        </div>
+    </div>
+
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!pendingRaisedRequests.length">
+            <span class="info">
+                No Pending Requests
+            </span>
+        </div>
+        <table class="table table-hover table-striped" ng-if="pendingRaisedRequests.length">
+            <thead>
+                <tr>
+                    <th class="text-right">#</th>
+                    <th>Originator</th>
+                    <th>Paying Entity</th>
+                    <th>Payee</th>
+                    <th>Description</th>
+                    <th>PPRF Date</th>
+                    <th>Due Date</th>
+                    <th>PPRF Number</th>
+                    <th>Status</th>
+                    <th>Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="pendingRaisedRequest in pendingRaisedRequests">
+                    <td class="text-right">{{ ((OriginatorFormsSearchCriteria.Pager.CurrentPage-1) * OriginatorFormsSearchCriteria.Pager.ItemsPerPage) + $index + 1 }}.</td>
+                    <td>{{ pendingRaisedRequest.OriginatorName }}</td>
+                    <td>{{ pendingRaisedRequest.PayingEntityName }}</td>
+                    <td>{{ pendingRaisedRequest.PayeeName }}</td>
+                    <td>{{ pendingRaisedRequest.Description | limitTo : 40 }}</td>
+                    <td>{{ pendingRaisedRequest.PprfDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ pendingRaisedRequest.DueDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ pendingRaisedRequest.PprfNo }}</td>
+                    @*<td>{{ pendingRaisedRequest.DocumentType + "/" + pendingRaisedRequest.PayingEntityCode + "/" + ("0"+(pendingRaisedRequest.Month)).slice(-2) + ("0"+pendingRaisedRequest.Year).slice(-2) + "/" + ("00000"+pendingRaisedRequest.Number).slice(-6) }}</td>*@
+                    <td>{{ pendingRaisedRequest.Status }}</td>
+                    <td>
+
+                        <a class="btn btn-xs btn-primary" ng-if="pendingRaisedRequest.Status!='Draft'" title="View Details" ng-click="viewRaisedRequestDetails(pendingRaisedRequest)">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a class="btn btn-xs btn-primary" ng-if="pendingRaisedRequest.Status=='Draft'" title="View Details" ng-click="viewDraftRaisedRequestDetails(pendingRaisedRequest)">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <span ng-if-start="pendingRaisedRequest.Status=='Pending'">|</span>
+
+                        @*<a ng-if-end class="btn btn-xs btn-primary" title="Resend Email" data-toggle="confirmation" ng-click="resendEmail(pendingRaisedRequest)">
+            <i class="fa fa-mail-forward"></i>
+        </a>*@
+                        @*Added by Ramesh*@
+                        <a href="javascript:void(0)" ng-if-end class="btn btn-xs btn-primary" title="Resend Email" data-toggle="confirmation" ng-click="SendEmailDialog(pendingRaisedRequest)">
+                            <i class="fa fa-mail-forward"></i>
+                        </a>
+
+                        @*<span ng-if-start="pendingRaisedRequest.IsClarificationRequired">|</span>
+        <a ng-if-end class="btn btn-xs btn-warning" title="Clarifications Required" ng-click="giveClarification(pendingRaisedRequest)">
+            <i class="fa fa-low-vision"></i>
+        </a>*@
+                        <span ng-if-start="pendingRaisedRequest.IsQuestionAsked">|</span>
+                        <a ng-if-end class="btn btn-xs btn-warning" title="Clarifications Required" ng-click="showQuestion(pendingRaisedRequest)">
+                            <i class="fa fa-low-vision"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr ng-repeat-end ng-if="pendingRaisedRequest.IsQuestionAsked" ng-show="pendingRaisedRequest.EditAnswer" ng-repeat="question in pendingRaisedRequest.RequestQuestions">
+                    <td></td>
+                    @*<td></td>*@
+                    <td colspan="5">
+                        <b>{{question.Question}}</b><br />
+                        <textarea name="clarification" id="clarification" ng-model="question.Answer" class="form-control input-sm"></textarea>
+                    </td>
+                    <td valign="bottom" style="vertical-align: bottom;">
+                        <a href="javascript:void(0)" class="btn btn-xs btn-primary" ng-click="saveAnswer(question)"><i class="fa fa-save"></i> Save</a>
+                        <a href="javascript:void(0)" class="btn btn-xs btn-default" ng-click="closeAnswerBox(pendingRaisedRequest)"><i class="fa fa-close"></i> Close</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                @*<tr ng-repeat-end ng-if="pendingRaisedRequest.IsClarificationRequired" ng-show="pendingRaisedRequest.EditClarification">
+                        <td></td>
+                        <td>Clarifications:</td>
+                        <td colspan="4">
+                            <textarea name="clarification" id="clarification" ng-model="pendingRaisedRequest.Clarifications" class="form-control input-sm"></textarea>
+                        </td>
+                        <td valign="bottom" style="vertical-align: bottom;">
+                            <a href="javascript:void(0)" class="btn btn-xs btn-primary" ng-click="saveClarification(pendingRaisedRequest)"><i class="fa fa-save"></i> Save</a>
+                            <a href="javascript:void(0)" class="btn btn-xs btn-default" ng-click="closeClarification(pendingRaisedRequest)"><i class="fa fa-save"></i> Close</a>
+                        </td>
+                        <td></td>
+                        <td></td>
+                    </tr>*@
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>

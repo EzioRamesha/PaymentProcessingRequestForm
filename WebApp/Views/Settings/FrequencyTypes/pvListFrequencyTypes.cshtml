@@ -1,0 +1,35 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Frequency Types
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!FrequencyTypes.length">
+            <span class="info">
+                No frequency type added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="FrequencyTypes.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="frequencyType in FrequencyTypes">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{frequencyType.Name}}</td>
+                    <td>{{frequencyType.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Frequency Type" ng-click="showEditFrequencyTypeDialog(frequencyType)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!frequencyType.IsEnabled" ng-click="enable(frequencyType)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="frequencyType.IsEnabled" ng-click="disable(frequencyType)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        Edit Paying Entity
+    </div>
+    <div class="panel-body pal" ng-init="init()">
+        <form>
+            <div class="form-body pal">
+                <!--<div class="row">
+                    <div class="col-md-12">
+                        <a href="javascript:void(0)" ng-click="newRange();" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add Range</a>
+                    </div>
+                </div>-->
+                <br />
+                <div class="row">
+                    <div class="col-md-12">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-right" style="width:5%">#</th>
+                                    <th class="text-right" style="width:15%">Range Start($)</th>
+                                    <th class="text-right" style="width:15%">Range End($)</th>
+                                    <th class="text-left" style="width:45%">Email(s)</th>
+                                    <th style="width:20%"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input type="hidden" ng-model="range.PayingEntityId" />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm text-right" ng-model="range.AmountFrom" ui-maskmoney />
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control input-sm text-right" ng-model="range.AmountTo" ui-maskmoney />
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <a href="javascript:void(0)" ng-click="addRange(range);" class="btn btn-sm btn-primary pull-right"><i class="fa fa-plus"></i> Add Range</a>
+                                    </td>
+                                </tr>
+                                <tr ng-repeat-start="item in AmountRangeConfigItems">
+                                    <td class="text-right">{{$index + 1 + '.'}}</td>
+                                    <td class="text-right">{{item.AmountFrom | number:2}}</td>
+                                    <td class="text-right">{{item.AmountTo | number:2}}</td>
+                                    <td class="text-left">{{item.EmailAddresses.length}}</td>
+                                    <td>
+                                        <a class="btn btn-xs btn-warning" title="View" href="javascript:void(0)" ng-click="item.Show=!item.Show;"><i class="fa fa-info-circle"></i></a>
+                                    </td>
+                                </tr>
+                                <tr ng-if="item.Show" ng-repeat-end>
+                                    <td></td>
+                                    <td colspan="3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control input-sm" ng-model="item.Emails" multiple-emails />
+                                            </div>
+                                            <div class="col-md-12">
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-default pull-right" ng-click="item.Show=false;"><i class="fa fa-close"></i> Cancel</a>
+                                                <a href="javascript:void(0)" class="btn btn-sm btn-primary pull-right" ng-click="addEmails(item);"><i class="fa fa-save"></i> Save</a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4" ng-repeat="email in item.EmailAddresses" title="{{email}}" >
+                                                <div class="col-md-9 text-center" style="overflow:hidden">
+                                                    <span class="pull-left">{{email}}</span>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <a href="javascript:void(0)" class="pull-right" ng-click="deleteEmail(email, item)"><i class="fa fa-close"></i></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <a class="btn btn-default btn-sm pull-right" title="Close" href="javascript:void(0)" ng-click="close()"><i class="fa fa-close"></i> Close</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,66 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        Add Currency
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">Name</label>
+                        <div class="input-icon right">
+                            <i class="fa fa-code"></i>
+                            <input id="Name" type="text" placeholder="" class="form-control" data-ng-model="newCurrency.Name" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Code" class="control-label">Code</label>
+                        <div class="input-icon right">
+                            <i class="fa fa-code"></i>
+                            <input id="Code" type="text" placeholder="" class="form-control" data-ng-model="newCurrency.Code" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="USDValue" class="control-label">USD Value</label>
+                        <div class="input-icon right">
+                            <i class="fa fa-money"></i>
+                            <input id="USDValue" type="text" placeholder="" class="form-control" data-ng-model="newCurrency.USDValue" mm-currency mm-precision="6" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="EuroValue" class="control-label">Euro Value</label>
+                        <div class="input-icon right">
+                            <i class="fa fa-money"></i>
+                            <input id="EuroValue" type="text" placeholder="" class="form-control" data-ng-model="newCurrency.EuroValue" mm-currency mm-precision="6" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Description" class="control-label">Description</label>
+                        <div class="input-icon right">
+                            <i class="fa fa-money"></i>
+                            <input id="Description" type="text" placeholder="" class="form-control" data-ng-model="newCurrency.Description" />
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+
+            <div class="text-right">
+                <a class="btn btn-primary btn-sm" ng-click="saveCurrency(newCurrency)">Add Currency</a>
+                <a class="btn btn-default btn-sm" ng-click="reset()">Reset</a>
+                <a class="btn btn-default btn-sm" ng-click="close()">Close</a>
+            </div>
+        </div>
+    </div>
+</div>

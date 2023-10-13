@@ -1,0 +1,42 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        Are you sure you want to re-send the email?
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">
+                            Remarks
+                        </label>
+                        <div class="input-icon right">
+                           
+                            <input id="Remark" type="text" placeholder="" required="true" class="form-control" data-ng-model="ReEmail.Remark" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="URGENT" class="control-label">
+                            URGENT
+                        </label>
+                        <div class="input-icon right">                          
+                            <input type="checkbox" data-ng-model="ReEmail.Checkbox" style="height:25px;width:25px" class="form-check-input" [ngModelOptions]="{standalone: true}" />
+                        </div>
+                    </div>
+                </div>              
+         </div>
+          
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="form-group">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="Send(ReEmail)">Send</a>
+                        <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()">Close</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

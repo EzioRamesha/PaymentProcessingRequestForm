@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "Manage Payees";
+}
+
+
+
+@section Styles{
+    <style type="text/css">
+        .app-modal-window .modal-dialog {
+            width: 900px;
+        }
+    </style>
+}
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.min.js" integrity="sha256-+C0A5Ilqmu4QcSPxrlGpaZxJ04VjsRjKu+G82kl5UJk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css" integrity="sha256-ze/OEYGcFbPRmvCnrSeKbRTtjG4vGLHXgOqsyLFTRjg=" crossorigin="anonymous" />
+
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeBankDetailsPopupController.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeePopupController.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeesController.js"></script>
+}
+@*@Scripts.Render("~/bundles/angular/generalService")
+    @Scripts.Render("~/bundles/settings/payee")*@
+
+
+<div ng-controller="PayeeController" data-ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" data-ng-click="payeeDialog()"><i class="fa fa-plus"></i> Add Payee</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/Payees/pvListPayees.cshtml")
+        </div>
+    </div>
+</div>

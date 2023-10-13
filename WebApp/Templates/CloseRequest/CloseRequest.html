@@ -1,0 +1,46 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        Are you sure you want to Close?
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Name" class="control-label">
+                            Close Request Reason
+                        </label>
+                        <div class="input-icon right">
+                           
+                            <select name="CloseRequestReason" class="form-control " data-ng-model="CloseRequestRemarks.CloseRequestReason" data-ng-required="true"
+                                data-ng-options="CloseRequestReason as CloseRequestReason.Description for CloseRequestReason in ClosePPRFReasonTypes | orderBy:'Id'">
+                                <option value="" selected disabled>--- Select ---</option>                              
+                            </select>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="Remarks" class="control-label">
+                            Remarks
+                        </label>
+                        <div class="input-icon right">                          
+                            <input id="Remark" type="text" placeholder="" required="true" class="form-control" data-ng-model="CloseRequestRemarks.Remark" />
+                        </div>
+                    </div>
+                </div>              
+         </div>
+          
+            <div class="row">
+                <div class="col-md-offset-6 col-md-6">
+                    <div class="form-group">
+                        <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="Close(CloseRequestRemarks)">Close Request</a>
+                        <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="Cancel()">Cancel</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,309 @@
+﻿<div class="panel panel-grey">
+    <div class="panel-heading">
+        New Payment Process Request Form
+    </div>
+    <div class="panel-body pan">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-3 pull-right" ng-show="request.DocumentType=='PFB'">
+                    <div class="form-group">
+                        <label><strong>Budget Order No</strong></label>
+                        <select name="budgetOrder" class="form-control input-sm" data-ng-model="request.BudgetOrder" data-ng-required="false"
+                                data-ng-options="budgetOrder as (budgetOrder.BudgetPPRFNo + ' - ' + budgetOrder.Description) for budgetOrder in BudgetOrders | orderBy:'BudgetPPRFNo'"
+                                ng-change="setFieldValuesForBudget(request.BudgetOrder)">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3 pull-right">
+                    <div class="form-group">
+                        <label><strong>Document Type</strong></label>
+                        <select name="documentType" class="form-control input-sm" data-ng-model="request.DocumentType" data-ng-required="true"
+                                ng-change="request.BudgetValidFrom=''; request.BudgetValidTo=''; request.RestrictedPayeeOnly=''; request.Payee=''; request.PayeeBank=''; request.BudgetOrder=''; budgetOrderRetrictPayee=''; request.BudgetApprovedAmtDesc=''">
+                            <option value="" selected disabled>--- Select ---</option>
+                            <option value="PO">Purchase Order</option>
+                            <option value="PF">PPRF</option>
+                            <option value="BDG">Budget Order</option>
+                            <option value="PFB">PRF (Budget Order)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label"><strong>Paying Entity</strong></label>
+                        <select name="payingEntity" class="form-control input-sm" data-ng-model="request.PayingEntity" data-ng-required="true"
+                                data-ng-options="payingEntity as payingEntity.Name for payingEntity in PayingEntities | orderBy:'Name'">
+                            <option value="" selected disabled>--- Select ---</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>PPRF Date</strong></label>
+                        <div class="input-icon right">
+                            <i class="fa fa-calendar"></i>
+                            <input id="pprfDate" type="text" placeholder="Select PPRF Date" class="form-control input-sm" ng-model="request.PPRFDate"
+                                   uib-datepicker-popup="{{format}}"
+                                   is-open="popup1.opened"
+                                   datepicker-options="dateOptions"
+                                   close-text="Close"
+                                   ng-click="showDatePicker1()"
+                                   alt-input-formats="altInputFormats"
+                                   @*datepicker*@
+                                   onkeydown="return false"
+                                   data-ng-required="true"
+                                   ng-change="setBudgetOrderList(request.PPRFDate)" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Due Date</strong></label>
+                        <div class="input-icon right">
+                            <i class="fa fa-calendar"></i>
+                            <input id="dueDate" type="text" placeholder="Due Date" class="form-control input-sm" ng-model="request.DueDate"
+                                   uib-datepicker-popup="{{format}}"
+                                   is-open="popup2.opened"
+                                   datepicker-options="dueDateOptions"
+                                   close-text="Close"
+                                   ng-click="showDatePicker2()"
+                                   alt-input-formats="altInputFormats"
+                                   @*datepicker*@
+                                   onkeydown="return false"
+                                   data-ng-required="true" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                @*<div class="col-md-6">
+                <div class="form-group">
+                    <label><strong>Country/Region</strong></label>
+                    <select name="Country" class="form-control input-sm" data-ng-model="request.Country" data-ng-required="true"
+                            data-ng-options="country as country.Name for country in Countries | orderBy:'Name'">
+                        <option value="" disabled>-- Select --</option>
+                    </select>
+                </div>
+            </div>*@
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Month</strong></label>
+                        <select name="Month" class="form-control input-sm" data-ng-model="request.Month" data-ng-required="true"
+                                data-ng-options="month.Value as month.Name for month in Months">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Year</strong></label>
+                        <select name="Year" class="form-control input-sm" ng-model="request.Year" ng-options="n for n in [] | range:yearRange.start:yearRange.end" data-ng-required="true">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label ng-show="request.DocumentType=='BDG'"><strong>Budget Valid From</strong></label>
+                        <div class="input-icon right">
+                            <i ng-show="request.DocumentType=='BDG'" class="fa fa-calendar"></i>
+                            <input id="pprfDate" type="text" placeholder="Select Budget Valid From" class="form-control input-sm" ng-model="request.BudgetValidFrom"
+                                   ng-show="request.DocumentType=='BDG'"
+                                   uib-datepicker-popup="{{format}}"
+                                   is-open="popup3.opened"
+                                   datepicker-options="DateOptions"
+                                   close-text="Close"
+                                   ng-click="showDatePicker3()"
+                                   alt-input-formats="altInputFormats"
+                                   @*datepicker*@
+                                   onkeydown="return false"
+                                   data-ng-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label ng-show="request.DocumentType=='BDG'"><strong>Budget Valid To</strong></label>
+                        <div class="input-icon right">
+                            <i ng-show="request.DocumentType=='BDG'" class="fa fa-calendar"></i>
+                            <input id="dueDate" type="text" placeholder="Select Budget Valid To" class="form-control input-sm" ng-model="request.BudgetValidTo"
+                                   ng-show="request.DocumentType=='BDG'"
+                                   uib-datepicker-popup="{{format}}"
+                                   is-open="popup4.opened"
+                                   datepicker-options="DateOptions"
+                                   close-text="Close"
+                                   ng-click="showDatePicker4()"
+                                   alt-input-formats="altInputFormats"
+                                   @*datepicker*@
+                                   onkeydown="return false"
+                                   data-ng-required="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" ng-show="request.DocumentType=='BDG'">
+                    <label><strong>Restrict Payee Select.</strong></label>
+                    <select name="RestrictedPayee" class="form-control input-sm" data-ng-model="request.RestrictedPayeeOnly"
+                            data-ng-options="restrictPayee.Value as restrictPayee.Name for restrictPayee in RestrictPayeeOption"
+                            ng-change="request.Payee=''; request.PayeeBank=''">
+                        <option value="" disabled>-- Select --</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><strong>Department</strong></label>
+                        <select name="Department" class="form-control input-sm" data-ng-model="request.Department" data-ng-required="true"
+                                ng-disabled="Departments.length==0"
+                                data-ng-options="department as department.Name for department in Departments | orderBy:'Name'">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label><strong>Payee</strong></label>
+                        <select name="Payee" class="form-control input-sm"
+                                data-ng-model="request.Payee"
+                                data-ng-required="request.RestrictedPayeeOnly=='Y' || request.RestrictedPayeeOnly==''"
+                                ng-disabled="(request.RestrictedPayeeOnly=='N' && request.DocumentType=='BDG') || budgetOrderRetrictPayee=='Y'"
+                                data-ng-options="payee as payee.Name for payee in Payees | orderBy:'Name'">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <br />
+                        <a class="btn btn-primary btn-sm" ng-click="addPayeeDialog()">Add</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><strong>Departments Account</strong></label>
+                        <select name="DepartmentsAccount" class="form-control input-sm" data-ng-model="request.DepartmentsAccount"
+                                data-ng-required="true"                              
+                                ng-disabled="DepartmentsAccounts.length==0"
+                                data-ng-options="DepartmentsAccount as DepartmentsAccount.Name for DepartmentsAccount in DepartmentsAccounts | orderBy:'Name'">
+                            <option value="">-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <br />
+                     
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Frequency Type</strong></label>
+                        <select name="FrequencyType" class="form-control input-sm" data-ng-model="request.FrequencyType" data-ng-required="true"
+                                data-ng-options="frequencyType as frequencyType.Name for frequencyType in FrequencyTypes | orderBy:'Name'">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Payment Method</strong></label>
+                        <select name="PaymentMethod" class="form-control input-sm" data-ng-model="request.PaymentMethod"
+                                data-ng-required="true"
+                                data-ng-options="paymentMethod as paymentMethod.Name for paymentMethod in PaymentMethods | orderBy:'Name'">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-5">
+                    <div class="form-group">
+                        <label><strong>Payee Account</strong></label>
+                        <select name="PayeeAccount" class="form-control input-sm" data-ng-model="request.PayeeBank"
+                                data-ng-required="request.RestrictedPayeeOnly=='Y' || request.RestrictedPayeeOnly==''"
+                                ng-disabled="PayeeAccounts.length==0"
+                                data-ng-options="payeeAccount as payeeAccount.AccountName for payeeAccount in PayeeAccounts | orderBy:'AccountName'">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <br />
+                        <a class="btn btn-primary btn-sm bottom" ng-click="payeeBankDetailsDialog(request.Payee)">Add</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label><strong>Nature of Expense</strong></label>
+                        <select name="ExpenseType" class="form-control input-sm" data-ng-model="request.ExpenseType" data-ng-required="true"
+                                data-ng-options="expenseType as expenseType.Name for expenseType in ExpenseTypes | orderBy:'Name'">
+                            <option value="" disabled>-- Select --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Hotel Name</strong></label>
+                        <input type="text" data-ng-model="request.Payee.HotelName" disabled class="form-control input-sm" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><strong>Hotel Country</strong></label>
+                        <input type="text" data-ng-model="request.Payee.CountryName" disabled class="form-control input-sm" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group mbn">
+                        <label><strong>Description</strong></label>
+                        <textarea rows="4" placeholder="Description" class="form-control input-sm" ng-model="request.Description"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group mbn">
+                        <label><strong>Remarks</strong></label>
+                        <textarea rows="4" placeholder="Remarks" class="form-control input-sm" ng-model="request.Remarks"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 pull-right">
+                    <div class="form-group">
+                        <label class="pull-right" ng-show="request.DocumentType=='PFB'"><strong>Spent Amount</strong></label>
+                        <input type="text" ng-show="request.DocumentType=='PFB'" data-ng-model="request.BudgetSpentAmtUSDDesc" disabled class="form-control input-sm text-right" />
+                    </div>
+                </div>
+                <div class="col-md-3 pull-right">
+                    <div class="form-group">
+                        <label class="pull-right" ng-show="request.DocumentType=='PFB'"><strong>Approved Amount</strong></label>
+                        <input type="text" ng-show="request.DocumentType=='PFB'" data-ng-model="request.BudgetApprovedAmtDesc" disabled class="form-control input-sm text-right" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

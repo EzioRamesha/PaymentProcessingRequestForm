@@ -1,0 +1,365 @@
+﻿<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-xs-5 col-sm-5 col-md-5 text-center pull-left" style="background-color:#000000; color:#FFFFFF;">
+                <h2>PAYMENT REQUEST FORM (PRF)</h2>
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3">
+                <img data-ng-src="data:image/png;base64,{{formDetails.PayingEntityLogo}}" height="95" width="150" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 pull-right">
+                <table class="table table-bordered table-condensed">
+                    <tbody>
+                        <tr>
+                            <td colspan="2" align="center" style="background-color:#000000; color: #FFFFFF">PRF No.:</td>
+                            <td colspan="2" align="center" style="background-color:#000000; color: #FFFFFF">
+                                {{ formDetails.PprfNo }}
+                                <!--{{formDetails.DocumentType + "/" + formDetails.PayingEntityCode + "/" + ("0"+(formDetails.Month)).slice(-2) + ("0"+formDetails.Year).slice(-2) + "/" + ("00000"+formDetails.PPRFNumber).slice(-6)}}-->
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" width="40%" style="background-color:#FFFFFF; color: #000000">PRF Date:</td>
+                            <td colspan="2" width="60%" style="background-color:#FFFFFF; color: #000000" align="center">{{formDetails.PprfDate | date : "dd-MMM-yy" }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="background-color:#FFFFFF; color: #000000">Pymt Due:</td>
+                            <td colspan="2" style="background-color:#FFFFFF; color: #000000" align="center">{{formDetails.DueDate | date : "dd-MMM-yy" }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="well col-md-12">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Paying Entity:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.PayingEntityName}}</strong>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-1">
+                            Status:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.Status}}</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Country/Region:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>-</strong>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-1">
+                            Month/Year:
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <strong>{{months[formDetails.Month - 1] + "-" + formDetails.Year}}</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Department:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.DepartmentName}}</strong>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-1">
+                            Frequency:
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <strong>{{formDetails.FrequencyTypeName}}</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Payment Method:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.PaymentMethodName}}</strong>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-1">
+                            Nature of Expense:
+                        </div>
+                        <div class="col-xs-4 col-sm-4 col-md-4">
+                            <strong>{{formDetails.ExpenseTypeName}}</strong>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Payee:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.PayeeName}}</strong>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-2">
+                            Budget Validity:
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.BudgetValidityDesc}}</strong>
+                        </div>
+                        <div class="col-xs-2 col-sm-2 col-md-2 col-sm-offset-1">
+                            Restricted Payee Only?
+                        </div>
+                        <div class="col-xs-3 col-sm-3 col-md-3">
+                            <strong>{{formDetails.RestrictedPayeeOnlyFlag}}</strong>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="text-right" width="4%">#</th>
+                                    <th width="45%">Particulars of Purchase(s) of Goods or Service(s)</th>
+                                    <th width="10%">Tax Type</th>
+                                    <th class="text-right" width="10%">Qty.</th>
+                                    <th class="text-right" width="13%">Amount {{"(in " + formDetails.CurrencyType.Code + ")"}}</th>
+                                    <th class="text-right" width="9%">
+                                        USD Amount <br>
+                                        ({{'@ ' + (formDetails.USDExRate | number : 5)}})
+                                    </th>
+                                    <th class="text-right" width="9%">
+                                        Euro Amount<br>
+                                        ({{'@ ' + (formDetails.EuroExRate | number : 5)}})
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="service in formDetails.GoodsAndServices">
+                                    <td align="right">{{$index + 1}}.</td>
+                                    <td>{{service.Description}}</td>
+                                    <td>{{service.TaxType.Name}}</td>
+                                    <td align="right">{{service.Quantity}}</td>
+                                    <td align="right">{{service.Amount | currency : "" : 2}}</td>
+                                    <td align="right">{{service.AmountUSD | currency : "" : 2}}</td>
+                                    <td align="right">{{service.AmountEuro | currency : "" : 2}}</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="2" rowspan="4">
+                                        <h5><b>Description:</b></h5>
+                                        <p>{{formDetails.Description}}</p>
+                                        <h5><b>Remarks:</b></h5>
+                                        <p>{{formDetails.Remarks}}</p>
+                                    </td>
+                                    <td></td>
+                                    <td><strong>Sub-Total</strong></td>
+                                    <td align="right">{{formDetails.SubTotal | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.SubTotalUSD | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.SubTotalEuro | currency : "" : 2}}</td>
+                                </tr>
+                                <tr>
+                                    <!--<td colspan="3"></td>-->
+                                    <td>{{formDetails.TaxType2.Name}}</td>
+                                    <td><strong>Tax Amount 1</strong></td>
+                                    <td align="right">{{formDetails.TaxAmount1 | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount1USD | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount1Euro | currency : "" : 2}}</td>
+                                </tr>
+                                <tr>
+                                    <!--<td colspan="2"></td>-->
+                                    <td>{{formDetails.TaxType2Name}}</td>
+                                    <td><strong>Tax Amount 2</strong></td>
+                                    <td align="right">{{formDetails.TaxAmount2 | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount2USD | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount2Euro | currency : "" : 2}}</td>
+                                </tr>
+                                <tr>
+                                    <!--<td colspan="2"></td>-->
+                                    <td>{{formDetails.TaxType3Name}}</td>
+                                    <td><strong>Tax Amount 2</strong></td>
+                                    <td align="right">{{formDetails.TaxAmount3 | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount3USD | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TaxAmount3Euro | currency : "" : 2}}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"></td>
+                                    <td><strong>Total</strong></td>
+                                    <td align="right">{{formDetails.Total | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TotalUSD | currency : "" : 2}}</td>
+                                    <td align="right">{{formDetails.TotalEuro | currency : "" : 2}}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+
+                    <div class="row">
+                        <div class="row" ng-if="formDetails.PaymentRequestDocuments && formDetails.PaymentRequestDocuments.length">
+                            <div class="box col-md-12 col-sm-12 col-xs-12">
+                                <div class="box-content">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <table class="table table-condensed table-bordered table-striped">
+                                                <thead>
+                                                    <tr>
+                                                      <th colspan="3">Attachment</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th width="6%">#</th>
+                                                        <th width="42%">Name</th>
+                                                        <th width="42%"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="document in formDetails.PaymentRequestDocuments">
+                                                        <td>{{$index + 1 + '.'}}</td>
+                                                        <td>{{document.DocumentName}}</td>
+                                                        <td>
+                                                            <a href="/Pprf/GetDocumentByDocId/?docID={{document.Id}}"><strong>{{document.DocumentName}}</strong></a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <table class="table table-condensed table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th colspan="8">
+                                        Approval Process
+                                        <a ng-if="isEdit" href="javascript:void(0);" class="btn btn-sm btn-primary pull-right" ng-click="addApprover()"><i class="fa fa-plus"></i> Add</a>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th align="right">#</th>
+                                    <th>Name</th>
+                                    <th>Position</th>
+                                    <th>Department</th>
+                                    <th>Approval Status</th>
+                                    <th>Response Date</th>
+                                    <th>Remarks</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>{{formDetails.Originator.OriginatorType}}</strong></td>
+                                    <td>{{formDetails.Originator.OriginatorName}}</td>
+                                    <td>{{formDetails.Originator.OriginatorDesignation}}</td>
+                                    <td>{{formDetails.Originator.OriginatorDepartmentName}}</td>
+                                    <td>{{formDetails.Originator.OriginatorStatus}}</td>
+                                    <td>{{formDetails.Originator.ResponseDate | date: "dd-MMM-yyyy"}}</td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+
+                                <tr data-ng-repeat="approval in formDetails.Approvals track by $index" ng-if="!isEdit">
+                                    <td><strong>{{approval.ApproverType}}</strong></td>
+                                    <td>{{approval.ApproverName}}</td>
+                                    <td>{{approval.ApproverDesignation}}</td>
+                                    <td>{{approval.ApproverDepartmentName}}</td>
+                                    <td>{{approval.ApprovalStatus}}</td>
+                                    <td>{{approval.ApprovalStatus=="Pending"?"-":approval.ResponseDate | date : "dd-MMM-yyyy"}}</td>
+                                    <td>{{approval.Remarks}}</td>
+                                    <td></td>
+                                </tr>
+                                <tr data-ng-repeat="approval in editApprovals track by $index" ng-if="isEdit">
+                                    <td><strong>{{ "Approver " + ($index + 1) }}</strong></td>
+                                    <td ng-if="approval.ApprovalStatus=='Approved'">{{approval.UserName}}</td>
+                                    <td ng-if="approval.ApprovalStatus!='Approved'">
+                                        <select name="Approver" class="form-control input-sm" 
+                                                data-ng-options="operator as operator.UserName for operator in Operators | groupFilter:this:'Approver '+($index + 1) | orderBy:'UserName'"
+                                                data-ng-model="operator" data-ng-required="true" ng-change="approverSelected(operator, $index)" >
+                                            <option value="">--- Select ---</option>
+                                        </select>
+                                    </td>
+                                    <td>{{approval.Designation}}</td>
+                                    <td>{{approval.DepartmentName}}</td>
+                                    <td>{{approval.ApprovalStatus}}</td>
+                                    <td>{{approval.ApprovalStatus=="Pending"?"-":approval.ResponseDate | date : "dd-MMM-yy"}}</td>
+                                    <td></td>
+                                    <td><a href="javascript:void(0)" class="btn btn-xs btn-danger" ng-if="approval.ApprovalStatus=='Pending'" ng-click="removeApprover()"><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <div class="panel panel-grey">
+                        <div class="panel-heading">
+                            Payee Bank Details
+                        </div>
+                        <div class="panel-body pal">
+                            <div class="form-body pal">
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Bank Name:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.BankName}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Account Name:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.AccountName}}</div>
+                                </div>
+                                <!--<div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Payee Address:</div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">{{formDetails.Payee.AddressLine1}} <br />{{formDetails.Payee.AddressLine2}}<br />{{formDetails.Payee.AddressLine3}}</div>
+                                </div>-->
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Bank Address:</div>
+                                    <div class="col-xs-6 col-sm-6 col-md-6">{{formDetails.PayeeBankDetails.BankAddress}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Account Number:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.AccountNumber}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Type of Account:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.AccountType}}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">IBAN Number:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.IBAN}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Swift Code:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.Swift}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-2 col-sm-2 col-md-2">Sort/IFSC Code:</div>
+                                    <div class="col-xs-4 col-sm-4 col-md-4">{{formDetails.PayeeBankDetails.IFSC}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 col-sm-3 col-md-3">
+                    <a class="btn btn-sm btn-danger" ng-if="formDetails.Status!='Closed'" ng-click="cancelRequest(formDetails)"><i class="fa fa-trash-o"></i> Cancel PPRF</a>
+                </div>
+                <div class="col-xs-9 col-sm-9 col-md-9 text-right">
+                    <a class="btn btn-sm btn-primary" ng-if="formDetails.Status=='Pending' && !isEdit" ng-click="edit(formDetails.RequestId)"><i class="fa fa-edit"></i> Edit</a>
+                    <a class="btn btn-sm btn-primary" ng-if="isEdit" ng-click="updateRequest()"><i class="fa fa-save"></i> Update</a>
+                    <a class="btn btn-sm btn-primary" ng-if="isEdit" ng-click="cancel()">Cancel</a>
+                    <a class="btn btn-sm btn-primary" ng-click="printRequest(formDetails.RequestId)"><i class="fa fa-print"></i> Print</a>
+                    <a class="btn btn-sm btn-primary" ng-click="close()"><i class="fa fa-close"></i> Close</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

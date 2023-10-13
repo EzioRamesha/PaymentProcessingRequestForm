@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Dashboard";
+}
+
+@section Scripts{
+    <script type="text/javascript" src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+    <script type="text/javascript" src="~/Scripts/PageScripts/Home/homeController.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeeBankDetailsPopupController.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/PayeePopupController.js"></script>
+    <script src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+    <script src="~/Scripts/PageScripts/NewRequest/newRequestController.js"></script>
+}
+
+@section Styles{
+    <style type="text/css">
+        .app-modal-window .modal-dialog {
+            width: 1200px;
+        }
+
+        .popover-actions {
+            max-width: 300px;
+        }
+    </style>
+}
+
+<div ng-controller="homeController" data-ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-md-12 col-lg-12">
+            <a class="btn btn-primary btn-sm pull-right" href="@Url.Action("New", "Pprf")"><i class="fa fa-arrow-up"></i> Raise PPRF</a>
+        </div>
+    </div>
+
+    <div class="row mbl">
+        <div class="col-md-12 col-lg-12">
+            @Html.Partial("~/Views/Home/pvPendingApprovals.cshtml")
+        </div>
+    </div>
+
+    <div class="row mbl">
+        <div  class="col-md-12 col-lg-12">
+            @Html.Partial("~/Views/Home/pvRaisedByMe.cshtml")
+        </div>
+    </div>
+
+</div>

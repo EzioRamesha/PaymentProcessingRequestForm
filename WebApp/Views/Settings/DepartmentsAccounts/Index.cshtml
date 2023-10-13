@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Manage DepartmentsAccounts";
+}
+
+@*@Scripts.Render("~/bundles/angular/generalService")
+    @Scripts.Render("~/bundles/settings/country")*@
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/DepartmentsAccountManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/DepartmentsAccountController.js"></script>
+    <script src="~/Scripts/PageScripts/NewRequest/RequestService.js"></script>
+}
+
+<div ng-controller="DepartmentsAccountController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="newDepartmentsAccountDialog()"><i class="fa fa-plus"></i> Add DepartmentsAccount</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/DepartmentsAccounts/DepartmentsAccount.cshtml")
+        </div>
+    </div>
+</div>
+

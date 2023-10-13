@@ -1,0 +1,76 @@
+﻿@*<ul uib-pagination total-items="Pager.TotalItems"
+    ng-model="Pager.CurrentPage"
+    max-size="5"
+    class="pagination-sm"
+    boundary-link-numbers="true"
+    rotate="false"></ul>*@
+
+<ul uib-pagination
+    total-items="Pager.TotalItems"
+    items-per-page="Pager.ItemsPerPage"
+    ng-model="Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="refresh(Pager)"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Paying Entities
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!PayingEntities.length">
+            <span class="info">
+                No paying entity added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="PayingEntities.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Abbreviation</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="payingEntity in PayingEntities">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{payingEntity.Name}}</td>
+                    <td>{{payingEntity.Abbreviation}}</td>
+                    <td>{{payingEntity.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Paying Entity" ng-click="editPayingEntityDialog(payingEntity)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-click="enable(payingEntity)" ng-if="!payingEntity.IsEnabled"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-click="disable(payingEntity)" ng-if="payingEntity.IsEnabled"><i class="fa fa-remove"></i></a> | 
+                        <a href="javascript:void(0)" class="btn btn-dark btn-xs" title="PPRF Amount Range" ng-click="editRange(payingEntity)"><i class="fa fa-dollar"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@*<ul uib-pagination total-items="Pager.TotalItems"
+    ng-model="Pager.CurrentPage"
+    items-per-page="Pager.ItemsPerPage"
+    max-size="5"
+    class="pagination-sm"
+    boundary-link-numbers="true"
+    rotate="false"
+    ng-change="refresh(Pager)"></ul>*@
+
+
+
+<ul uib-pagination 
+    total-items="Pager.TotalItems" 
+    items-per-page="Pager.ItemsPerPage" 
+    ng-model="Pager.CurrentPage" 
+    max-size="6" 
+    class="pagination-sm" 
+    boundary-links="true" 
+    force-ellipses="true" 
+    ng-change="refresh(Pager)">
+</ul>

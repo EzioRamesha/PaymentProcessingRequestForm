@@ -1,0 +1,35 @@
+﻿
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        Payment Methods
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!PaymentMethods.length">
+            <span class="info">
+                No payment method added.
+            </span>
+        </div>
+        <table class="table table-hover table-striped table-bordered" ng-if="PaymentMethods.length">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Active</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="paymentMethod in PaymentMethods">
+                    <td>{{$index + 1}}.</td>
+                    <td>{{paymentMethod.Name}}</td>
+                    <td>{{paymentMethod.IsEnabled ? "Active" : "De-active"}}</td>
+                    <td>
+                        <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Payment Method" ng-click="showEditPaymentMethodDialog(paymentMethod)"><i class="fa fa-edit"></i></a> |
+                        <a href="javascript:void(0)" class="btn btn-success btn-xs" title="Activate" ng-if="!paymentMethod.IsEnabled" ng-click="enable(paymentMethod)"><i class="fa fa-check"></i></a>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Deactivate" ng-if="paymentMethod.IsEnabled" ng-click="disable(paymentMethod)"><i class="fa fa-remove"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

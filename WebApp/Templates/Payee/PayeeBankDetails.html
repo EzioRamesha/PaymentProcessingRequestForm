@@ -1,0 +1,160 @@
+﻿<div class="panel panel-green">
+    <div class="panel-heading">
+        {{payee.Name + "'s Account(s) Details"}}
+    </div>
+
+    <div class="panel-body pal">
+        <div class="form-body pal">
+            <div class="row">
+                <table class="table table-hover table-striped header-fixed table-scroll">
+                    <thead>
+                        <tr>
+                            <th width="10%" class="text-right">S No</th>
+                            <th width="25%">Account Name</th>
+                            <th width="25%">Bank Name</th>
+                            <th width="25%">Account Number</th>
+                            <th width="15%">Action(s)</th>
+                        </tr>
+                    </thead>
+                    <tbody style="min-height:40px; max-height:160px;">
+                        <tr ng-if="payee.AccountDetails.length<1">
+                            <th colspan="5" class="text-center">No bank added.</th>
+                        </tr>
+                        <tr ng-repeat="account in payee.AccountDetails track by $index">
+                            <td width="10%" class="text-right">{{$index + 1}}.</td>
+                            <td width="25%">{{account.AccountName}}</td>
+                            <td width="25%">{{account.BankName}}</td>
+                            <td width="25%">{{account.AccountNumber}}</td>
+                            <td width="15%">
+                                <a href="javascript:void(0)" class="btn btn-primary btn-xs" title="Edit Account" data-ng-click="editAccount(account)"><i class="fa fa-edit"></i></a> |
+                                <!--<a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Remove" data-ng-click="remove(account)"><i class="fa fa-trash"></i></a>-->
+                                <a href="javascript:void(0)" class="btn btn-danger btn-xs" title="Remove" data-ng-click="RemovePayeeBank(account)"><i class="fa fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="form-body pal">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="BankName" class="control-label">
+                                    Bank Name
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-bank"></i>
+                                    <input id="BankName" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.BankName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Name" class="control-label">
+                                    Account Name
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-bank"></i>
+                                    <input id="AccountName" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.AccountName" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Name" class="control-label">
+                                    Account Number
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-id-badge"></i>
+                                    <input id="AccountNumber" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.AccountNumber" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IFSC" class="control-label">
+                                    IFSC
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-id-card"></i>
+                                    <input id="IFSC" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.IFSC" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="IBAN" class="control-label">
+                                    IBAN
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-id-card"></i>
+                                    <input id="IBAN" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.IBAN" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="Swift" class="control-label">
+                                    Swift
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-id-card"></i>
+                                    <input id="Swift" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.Swift" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="AccountType" class="control-label">
+                                    Account Type
+                                </label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-id-card"></i>
+                                    <input id="AccountType" type="text" placeholder="" class="form-control input-sm" data-ng-model="account.AccountType" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="BankAddress" class="control-label">Bank Address</label>
+                                <div class="input-icon right">
+                                    <i class="fa fa-address-card"></i>
+                                    <input type="text" class="form-control input-sm" data-ng-model="account.BankAddress" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">&nbsp;</label>
+                            <div class="form-group text-right">
+                                <!--<a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="AddToList(account)" data-ng-if="!IsEdit"><i class="fa fa-plus"></i> Add</a>-->
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="AddPayeeBank(account)" data-ng-if="!IsEdit"><i class="fa fa-plus"></i> Add</a>
+                                <!--<a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="UpdateAccount(account)" data-ng-if="IsEdit"><i class="fa fa-upload"></i> Update</a>-->
+                                <a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="UpdatePayeeBank(account)" data-ng-if="IsEdit"><i class="fa fa-save"></i> Update</a>
+                                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="reset()"><i class="fa fa-recycle"></i> Reset</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="control-label">&nbsp;</label>
+                            <div class="form-group text-right">
+                                <a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()"><i class="fa fa-close"></i> Close</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <!--<a href="javascript:void(0)" class="btn btn-primary btn-sm" ng-click="save(payee)"><i class="fa fa-save"></i> Save</a>-->
+                        <!--<a href="javascript:void(0)" class="btn btn-default btn-sm" ng-click="close()"><i class="fa fa-close"></i> Close</a>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <!--<div class="form-body pal">
+
+        </div>-->
+    </div>
+</div>

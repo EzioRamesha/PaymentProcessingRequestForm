@@ -1,0 +1,259 @@
+﻿@*@model WebApp.DAL.Models.ClosedRequestsViewModel*@
+
+
+<ul uib-pagination
+    total-items="closedRequestsSearchCriteria.Pager.TotalItems"
+    items-per-page="closedRequestsSearchCriteria.Pager.ItemsPerPage"
+    ng-model="closedRequestsSearchCriteria.Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="filterClosedFormsData(closedRequestsSearchCriteria)" ng-if="closedRequests.length"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        ALL PO/PPRFs
+    </div>
+
+    <div class="panel-body pan">
+        <div class="form-body pal">
+            <div class="row">
+                <div class="col-md-12 col-lg-12">
+                    <form action="/Home/ExportClosedForms" method="post">
+                        <fieldset>
+                            <legend>
+                                @*<a href="javascript:void(0)" data-toggle="collapse" data-target="#filter2"><i class="fa fa-plus-circle fa-2x"></i></a>*@ 
+                                Filter
+                            </legend>
+                            <div id="filter2" @*class="collapse"*@>
+                                <div class="row mbl">
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Paying Entity</label>
+                                            <select name="payingEntity" onclick="Selectonclick()" placeholder="Pick a payingEntity..."
+                                                    class="form-control input-sm"
+                                                    data-ng-model="closedRequestsSearchCriteria.Filters.PayingEntityId"
+                                                    data-ng-options="payingEntity.Id as payingEntity.Name for payingEntity in PayingEntities | orderBy:'Name'">
+                                                <option value="" selected disabled>--- Select ---</option>
+                                            </select>
+                                            <script type="text/javascript">
+                                                function Selectonclick() {
+                                                    $('select').selectize({
+                                                        sortField: 'text'
+                                                    });
+                                                };
+                                                document.addEventListener("DOMContentLoaded", function (event) {
+                                                    setTimeout(Selectonclick, 300)
+                                                });
+                                                
+                                            </script>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Department</label>
+                                            <select name="department"  placeholder="Pick a department..."
+                                                    class="form-control input-sm"
+                                                    data-ng-model="closedRequestsSearchCriteria.Filters.DepartmentId"
+                                                    data-ng-options="department.Id as department.Name for department in Departments | orderBy:'Name'">
+                                                <option value="" selected disabled>--- Select ---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Payee</label>
+                                            <select name="payee" placeholder="Pick a payee..."
+                                                    class="form-control input-sm"
+                                                    data-ng-model="closedRequestsSearchCriteria.Filters.PayeeId"
+                                                    data-ng-options="payee.Id as payee.Name for payee in Payees | orderBy:'Name'">
+                                                <option value="" selected disabled>--- Select ---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">From Date</label>
+                                            <input type="text"
+                                                   class="form-control input-sm"
+                                                   ng-model="closedRequestsSearchCriteria.Filters.StartDate"
+                                                   @*ng-value="firstDay"*@
+                                                   uib-datepicker-popup="dd/MM/yyyy"
+                                                   is-open="popup1.opened"
+                                                   datepicker-options="startDateOptions"
+                                                   close-text="Close"
+                                                   ng-click="showDatePicker1()"
+                                                   alt-input-formats="altInputFormats"
+                                                   onkeydown="return false" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">To Date</label>
+                                            <input type="text"
+                                                   class="form-control input-sm"
+                                                   ng-model="closedRequestsSearchCriteria.Filters.EndDate"
+                                                   @*ng-value="lastDay"*@
+                                                   uib-datepicker-popup="dd/MM/yyyy"
+                                                   is-open="popup2.opened"
+                                                   datepicker-options="endDateOptions"
+                                                   close-text="Close"
+                                                   ng-click="showDatePicker2()"
+                                                   alt-input-formats="altInputFormats"
+                                                   onkeydown="return false" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <label class="control-label">Status</label>
+                                            <select name="status" placeholder="Pick a Status..."
+                                                    class="form-control input-sm"
+                                                    data-ng-model="closedRequestsSearchCriteria.Filters.Status"
+                                                    data-ng-options="status.Value as status.Name for status in Statuses | orderBy:'Name'">
+                                                <option value="" selected disabled>--- Select ---</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row mbl">
+                                    <div class="col-md-offset-9 col-md-1">
+                                        <a class="btn btn-sm btn-green" href="javascript:void(0)" ng-click="filterClosedFormsData(closedRequestsSearchCriteria)"><i class="fa fa-search"></i> Search</a>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <button type="submit" class="btn btn-sm btn-dark"><i class="fa fa-file-excel-o" download></i> Export</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>                        
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" ng-if="!closedRequests.length">
+            <span class="info">
+                <b>No Pending Requests</b><br\>
+            </span>
+        </div>
+        <table class="table table-hover table-striped" ng-if="closedRequests.length">
+            <thead>
+                <tr>
+                    <th class="text-right">#</th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='Originator'">
+                            Originator
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='Originator'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='PayingEntity'">
+                            Paying Entity
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='PayingEntity'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='Department'">
+                            Dept.
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='Department'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='Payee'">
+                            Payee
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='Payee'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='Description'">
+                            Description
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='Description'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='PprfDate'">
+                            PRF Date
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='PprfDate'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='DueDate'">
+                            Due Date
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='DueDate'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='PprfNo'">
+                            PRF Number
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='PprfNo'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='TotalValue'">
+                            Amount
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='TotalValue'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="javascript:void(0)" ng-click="closedRequestsSearchCriteria.Sort.SortDirection=closedRequestsSearchCriteria.Sort.SortDirection == 'asc'?'desc':'asc'; closedRequestsSearchCriteria.Sort.SortParameter='Status'">
+                            Status
+                            <span ng-if="closedRequestsSearchCriteria.Sort.SortParameter=='Status'">
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'desc'" class="fa fa-caret-down"></i>
+                                <i ng-show="closedRequestsSearchCriteria.Sort.SortDirection == 'asc'" class=" fa fa-caret-up"></i>
+                            </span>
+                        </a>
+                    <th>Remarks</th>
+                    <th>Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="closedRequest in closedRequests">
+                    <td class="text-right">{{ ((closedRequestsSearchCriteria.Pager.CurrentPage-1) * 10) + $index + 1 }}.</td>
+                    <td>{{ closedRequest.OriginatorName }}</td>
+                    <td>{{ closedRequest.PayingEntityName }}</td>
+                    <td>{{ closedRequest.DepartmentName }}</td>
+                    <td>{{ closedRequest.PayeeName }}</td>
+                    <td>{{ closedRequest.Description | limitTo : 40 }}</td>
+                    <td>{{ closedRequest.PprfDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ closedRequest.DueDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ closedRequest.PprfNo }}</td>
+                    <td>{{ closedRequest.CurrencyCode }} <br /> {{ closedRequest.TotalValueIncTax | currency : "" : 2 }} </td>
+                    @*<td>{{ closedRequest.DocumentType + "/" + closedRequest.PayingEntityCode + "/" + ("0"+(closedRequest.Month)).slice(-2) + ("0"+closedRequest.Year).slice(-2) + "/" + ("00000"+closedRequest.Number).slice(-6) }}</td>*@
+                    <td>{{ closedRequest.Status }}</td>
+                    <td>{{ closedRequest.Remarks }}</td>
+                    <td>
+                        @*<a class="btn btn-xs btn-primary" title="View Details" ng-click="viewDetailsClosedRequest(closedRequest)">*@
+                        <a class="btn btn-xs btn-primary" title="View Details" ng-click="viewRequestDetails(closedRequest)">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Manage ExpenseTypes";
+}
+
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/ExpenseTypeManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/ExpenseTypeController.js"></script>
+}
+
+<div ng-controller="ExpenseTypeController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="showNewExpenseTypeDialog()"><i class="fa fa-plus"></i> Add Expense Type</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/ExpenseTypes/pvListExpenseTypes.cshtml")
+        </div>
+    </div>
+</div>
+

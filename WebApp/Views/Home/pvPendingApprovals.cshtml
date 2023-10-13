@@ -1,0 +1,95 @@
+﻿<ul uib-pagination
+    total-items="RequestFormsSearchCriteria.Pager.TotalItems"
+    items-per-page="RequestFormsSearchCriteria.Pager.ItemsPerPage"
+    ng-model="RequestFormsSearchCriteria.Pager.CurrentPage"
+    max-size="6"
+    class="pagination-sm"
+    boundary-links="true"
+    force-ellipses="true"
+    ng-change="refreshApproverForms(RequestFormsSearchCriteria)" ng-if="pendingApprovals.length"></ul>
+
+<div class="panel panel-grey">
+    <div class="panel-heading">
+        <div class="row">
+            Pending Payment Processing Requests
+            @*<ul uib-pagination
+                style="margin:0; float:right"
+                total-items="RequestFormsSearchCriteria.Pager.TotalItems"
+                items-per-page="RequestFormsSearchCriteria.Pager.ItemsPerPage"
+                ng-model="RequestFormsSearchCriteria.Pager.CurrentPage"
+                max-size="6"
+                class="pagination-sm"
+                boundary-links="true"
+                force-ellipses="true"
+                ng-change="refreshApproverForms(RequestFormsSearchCriteria)" ng-if="pendingApprovals.length"></ul>*@
+        </div>
+    </div>
+    <div class="panel-body pan">
+        <div class="text-center" ng-if="!pendingApprovals.length">
+            <span class="info">
+                No Pending Approvals
+            </span>
+        </div>
+        <table class="table table-hover table-striped" ng-if="pendingApprovals.length">
+            <thead>
+                <tr>
+                    <th align="right">#</th>
+                    <th>Originator</th>
+                    <th>Originator Email</th>
+                    <th>Paying Entity</th>
+                    <th>Description</th>
+                    <th>PPRF Date</th>
+                    <th>Due Date</th>
+                    <th>PPRF Number</th>
+                    <th>Status</th>
+                    <th>Action(s)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat-start="pendingApproval in pendingApprovals">
+                    <td align="right">{{ ((RequestFormsSearchCriteria.Pager.CurrentPage-1) * RequestFormsSearchCriteria.Pager.ItemsPerPage ) + $index + 1 }}.</td>
+                    <td>{{ pendingApproval.OriginatorName }}</td>
+                    <td>{{ pendingApproval.OriginatorEmail }}</td>
+                    <td>{{ pendingApproval.PayingEntityName }}</td>
+                    <td>{{ pendingApproval.Description | limitTo : 40 }}</td>
+                    <td>{{ pendingApproval.PprfDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ pendingApproval.DueDate | date : "dd-MMM-yyyy" }}</td>
+                    <td>{{ pendingApproval.PprfNo }}</td>
+                    @*<td>{{ pendingApproval.DocumentType + "/" + pendingApproval.PayingEntityCode + "/" + ("0"+(pendingApproval.Month)).slice(-2) + ("0"+pendingApproval.Year).slice(-2) + "/" + ("00000"+pendingApproval.Number).slice(-6) }}</td>*@
+                    <td>{{ pendingApproval.Status }}</td>
+                    <td>
+                        <script type="text/ng-template" id="myPopoverTemplate.html">
+                            <a class="btn btn-xs btn-primary" title="View Details" ng-click="viewRequestDetails(pendingApproval)"><i class="fa fa-eye"></i></a> |
+                            <a class="btn btn-xs btn-success" title="Approve" ng-click="approve(pendingApproval)"><i class="fa fa-check"></i></a> |
+                            <a class="btn btn-xs btn-danger" title="Reject" ng-click="reject(pendingApproval)"><i class="fa fa-remove"></i></a> |
+                            @*<a class="btn btn-xs btn-warning" title="Ask for clarification" ng-click="askClarification(pendingApproval)" ng-disabled="pendingApproval.IsClarificationRequired"><i class="fa fa-sticky-note"></i></a>*@
+                            <a class="btn btn-xs btn-grey" title="Ask a question" ng-click="showAskQuestion(pendingApproval)" ng-if-start="pendingApproval.AskAnotherQuestion" ng-disabled="pendingApproval.IsQuestionAsked"><i class="fa fa-question"></i></a> <span ng-if-end>|</span>
+                            <a class="btn btn-xs btn-warning" title="View Queries" ng-click="viewQueries(pendingApproval)"><b>A</b></a>
+                        </script>
+                        <button class="btn btn-xs btn-yellow" title="View Actions"
+                           uib-popover-template="actions.templateUrl"
+                           popover-placement="{{actions.placement}}"
+                           popover-trigger="'outsideClick'"
+                           popover-class="{{actions.cclass}}">
+                            <i class="fa fa-gear"></i>
+                        </button>
+                    </td>
+                </tr>
+
+                <tr ng-repeat-end ng-if="pendingApproval.AskAnotherQuestion" ng-show="pendingApproval.editQuestion">
+                    <td></td>
+                    <td>Your Question:</td>
+                    <td colspan="4">
+                        <textarea name="clarification" id="clarification" ng-model="pendingApproval.Question" class="form-control input-sm"></textarea>
+                    </td>
+                    <td valign="bottom" style="vertical-align: bottom;" colspan="2">
+                        <a href="javascript:void(0)" class="btn btn-xs btn-primary" ng-click="askQuestion(pendingApproval)"><i class="fa fa-save"></i> Save</a>
+                        <a href="javascript:void(0)" class="btn btn-xs btn-default" ng-click="closeQuestionBox(pendingApproval)"><i class="fa fa-close"></i> Close</a>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

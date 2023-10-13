@@ -1,0 +1,57 @@
+﻿<div class="panel panel-grey">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-6 text-left">
+                Approvers
+            </div>
+            <div class="col-md-6 text-right">
+                <a class="btn btn-primary btn-sm" ng-click="addApprover()">Add</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pan">
+        <div class="form-body pal">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Approver Name</th>
+                        <th>Department</th>
+                        <th>Designation</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Originator</td>
+                        <td>
+                            @*| groupFilter:this:'Originator'*@
+                            <select name="Originator" class="form-control input-sm" data-ng-options="operator as operator.UserName for operator in Operators | groupFilter:this:'Originator' | orderBy:'UserName'"
+                                    data-ng-model="request.Originator" data-ng-required="true">
+                                <option value="">--- Select ---</option>
+                            </select>
+                        </td>
+                        <td>{{request.Originator.DepartmentName}}</td>
+                        <td>{{request.Originator.Designation}}</td>
+                        <td></td>
+                    </tr>
+                    <tr data-ng-repeat="approver in request.Approvers track by $index" data-ng-model="approver">
+                        <td>Approver {{$index + 1}}</td>
+                        <td>
+                            @*| groupFilter:this:'Approver '+($index + 1)*@
+                            <select name="Approver" class="form-control input-sm" data-ng-options="operator as operator.UserName for operator in Operators | groupFilter:this:'Approver '+($index + 1) | orderBy:'UserName'"
+                                    data-ng-model="operator" data-ng-required="true" ng-change="approverSelected(operator, $index)">
+                                <option value="">--- Select ---</option>
+                            </select>
+                        </td>
+                        <td>{{approver.DepartmentName}}</td>
+                        <td>{{approver.Designation}}</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm pull-right" ng-if="$index==request.Approvers.length-1" ng-click="removeApprover(approver)"><i class="fa fa-remove"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

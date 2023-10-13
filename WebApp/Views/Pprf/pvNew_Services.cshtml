@@ -1,0 +1,128 @@
+﻿<div class="panel panel-grey">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-2 text-left">
+                Goods And Services
+            </div>
+            <div class="col-md-2 text-left">
+                <select name="CurrencyType" class="form-control input-sm" data-ng-model="request.CurrencyType" data-ng-required="true"
+                        data-ng-options="currencyType as currencyType.Name for currencyType in CurrencyTypes | orderBy:'Name'" data-ng-change="currencyChanged();">
+                    <option value="" selected disabled>-- Select --</option>
+                </select>
+            </div>
+            <div class="col-md-3 text-left">
+                <div class="col-md-6">USD Ex-Rate: </div>
+                <div class="col-md-6">
+                    <input class="form-control input-sm" ng-model="editValueUSD" ng-disabled="!currencyEditable" mm-currency mm-precision="5" data-ng-change="dataChanged()"/>
+                </div>
+            </div>
+            <div class="col-md-3 text-left">
+                <div class="col-md-6">EUR Ex-Rate: </div>
+                <div class="col-md-6">
+                    <input class="form-control input-sm" ng-model="editValueEuro" ng-disabled="!currencyEditable" mm-currency mm-precision="5" data-ng-change="dataChanged()"/>
+                </div>
+            </div>
+            <div class="col-md-1 text-left">
+                <a href="javascript:void(0)" ng-click="editCurrency(true)" data-ng-if="!currencyEditable" class="btn btn-sm btn-warning" style="color:#FFFFFF">Edit Values</a>
+                <a href="javascript:void(0)" ng-click="editCurrency(false)" data-ng-if="currencyEditable" class="btn btn-sm btn-success" style="color:#FFFFFF">Use Original</a>
+            </div>
+            <div class="col-md-1 text-right pull-right">
+                <a class="btn btn-primary btn-sm" ng-click="addService()">Add</a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body pan">
+        <div class="form-body pal">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-right" width="5%">#</th>
+                        <th width="40%">Particulars of Purchase(s)</th>
+                        <th class="text-left" width="10%">Tax Type</th>
+                        <th class="text-right" width="10%">Quantity</th>
+                        <th class="text-right" width="10%">Amount</th>
+                        <th class="text-right" width="10%">Amount (USD)</th>
+                        <th class="text-right" width="10%">Amount (Euro)</th>
+                        <th class="text-left" width="5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="service in request.GoodsAndServices">
+                        <td class="text-right">{{$index + 1}}.</td>
+                        <td><input name="Description" type="text" class="form-control input-sm" data-ng-model="service.Description" data-ng-required="true" /></td>
+                        <td>
+                            <select class="form-control input-sm" data-ng-model="service.TaxType"
+                                    data-ng-options="taxType as taxType.Name for taxType in TaxTypes" data-ng-change="dataChanged()">
+                                <option value="">Tax Type</option>
+                            </select>
+                        </td>
+                        <td><input name="Quantity" type="text" class="form-control input-sm text-right" data-ng-model="service.Quantity" data-ng-required="true" /></td>
+                        <td><input name="Amount" type="text" class="form-control input-sm" data-ng-model="service.AmountDisp" ng-change="dataChanged()" mm-currency data-ng-required="true" /></td>
+                        <td><input type="text" class="form-control input-xs text-right" disabled data-ng-model="service.AmountUSDDisp" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="service.AmountEuroDisp" /></td>
+                        <td><a href="javascript:void(0)" class="btn btn-danger btn-sm" data-ng-click="removeService(service)"><i class="fa fa-remove"></i></a></td>
+                    </tr>
+                </tbody>
+                <tfoot data-ng-if="request.GoodsAndServices.length>0">
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>Sub-Total</td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.SubTotal" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.SubTotalUSD" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.SubTotalEuro" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>Tax Amount 1</td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmount" data-ng-change="dataChanged()" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmountUSD" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmountEuro" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>
+                            <select class="form-control input-sm" data-ng-model="request.TaxType2"
+                                    data-ng-options="taxType as taxType.Name for taxType in TaxTypes">
+                                <option value="">Tax Type</option>
+                            </select>
+                        </td>
+                        <td>Tax Amount 2</td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="request.TaxAmount2Disp" mm-currency data-ng-change="dataChanged()" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmount2USD" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmount2Euro" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>
+                            <select class="form-control input-sm" data-ng-model="request.TaxType3"
+                                    data-ng-options="taxType as taxType.Name for taxType in TaxTypes">
+                                <option value="">Tax Type</option>
+                            </select>
+                        </td>
+                        <td>Tax Amount 3</td>
+                        <td><input type="text" class="form-control input-sm" data-ng-model="request.TaxAmount3Disp" mm-currency data-ng-change="dataChanged()" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmount3USD" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TaxAmount3Euro" /></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"></td>
+                        <td>Total</td>
+                        <td><input type="text" disabled style="background-color:aquamarine !important; font-weight:bold" class="form-control input-sm" data-ng-model="request.Total" mm-currency /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TotalUSD" /></td>
+                        <td><input type="text" class="form-control input-sm text-right" disabled data-ng-model="request.TotalEuro" /></td>
+                        <td></td>
+                    </tr>
+                </tfoot>
+                <tfoot>
+                    <tr data-ng-if="request.GoodsAndServices.length==0">
+                        <td colspan="8" align="center">No service(s) added.</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Manage Frequency Types";
+}
+
+
+@section Scripts{
+    <script src="~/Scripts/PageScripts/Settings/GeneralService.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/FrequencyTypeManager.js"></script>
+    <script src="~/Scripts/PageScripts/Settings/FrequencyTypeController.js"></script>
+}
+
+<div ng-controller="FrequencyTypeController" ng-init="initialize()">
+    <div class="row mbl">
+        <div class="col-lg-12 col-md-12">
+            <a class="btn btn-primary btn-sm pull-right" href="javascript:void(0)" ng-click="showNewFrequencyTypeDialog()"><i class="fa fa-plus"></i> Add Frequency Type</a>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            @Html.Partial("~/Views/Settings/FrequencyTypes/pvListFrequencyTypes.cshtml")
+        </div>
+    </div>
+</div>
+
